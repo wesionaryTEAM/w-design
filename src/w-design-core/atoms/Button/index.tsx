@@ -1,4 +1,5 @@
-import { tv } from "tailwind-variants";
+import { VariantProps, tv } from "tailwind-variants";
+import React from "react"; // Import React
 
 const button = tv({
   base: "font-medium bg-blue-500 text-white rounded-full active:opacity-80",
@@ -25,10 +26,22 @@ const button = tv({
   },
 });
 
-export const Button = () => {
+type ButtonVariants = VariantProps<typeof button>;
+
+export interface ButtonProps extends ButtonVariants {
+  name?: React.ReactNode;
+  variant?: "primary" | "secondary";
+  size?: "sm" | "md" | "lg";
+}
+
+export const Button: React.FC<ButtonProps> = ({
+  name,
+  variant = "primary",
+  size = "md",
+}) => {
   return (
-    <button className={button({ size: "lg", color: "primary" })}>
-      Am I a Button?
+    <button className={button({ size, color: variant })}>
+      <span>{name}</span>
     </button>
   );
 };
