@@ -14,7 +14,7 @@
   "dependencies": {
     "@types/node": "^20.5.4",
     "autoprefixer": "^10.4.15",
-    "postcss": "^8.4.28",
+    "postcss": "^8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-variants": "^0.1.13",
