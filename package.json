@@ -12,13 +12,18 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@types/node": "^20.5.4",
+    "@types/node": "^20.11.17",
     "autoprefixer": "^10.4.15",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.323.0",
     "postcss": "^8.4.28",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.2.1",
     "tailwind-variants": "^0.1.13",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.4.2",
