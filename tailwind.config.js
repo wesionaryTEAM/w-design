@@ -2,7 +2,6 @@
 const { withTV } = require("tailwind-variants/transformer");
 
 export default withTV({
-  content: ["./src/w-design-core/**/*.{js,ts,jsx,tsx}"],
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
