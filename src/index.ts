@@ -1,1 +1,1 @@
-export * from "./w-design-core";
+export * from "./components";
