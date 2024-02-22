@@ -10,9 +10,9 @@ const meta: Meta<typeof Input> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Input>;
+type InputStory = StoryObj<typeof Input>;
 
-export const Text: Story = {
+export const Text: InputStory = {
   args: {
     variant: "default",
     disabled: false,
@@ -20,7 +20,7 @@ export const Text: Story = {
     placeholder: 'Text Input',
   },
 };
-export const Password: Story = {
+export const Password: InputStory = {
   args: {
     variant: "default",
     disabled: false,
@@ -28,7 +28,7 @@ export const Password: Story = {
     placeholder: 'Password Input',
   },
 };
-export const Email: Story = {
+export const Email: InputStory = {
   args: {
     variant: "default",
     disabled: false,
@@ -36,7 +36,7 @@ export const Email: Story = {
     placeholder: 'Email Input',
   },
 };
-export const Number: Story = {
+export const Number: InputStory = {
   args: {
     variant: "default",
     disabled: false,
@@ -44,7 +44,7 @@ export const Number: Story = {
     placeholder: 'Number Input',
   },
 };
-export const Search: Story = {
+export const Search: InputStory = {
   args: {
     variant: "default",
     disabled: false,

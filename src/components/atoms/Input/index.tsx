@@ -1,4 +1,5 @@
 
+import { cn } from "@/lib/utils";
 import * as React from "react"
 
 import { VariantProps, tv } from "tailwind-variants";
@@ -18,21 +19,53 @@ const input = tv({
 })
 type InputVarinats = VariantProps<typeof input>;
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> , InputVarinats{
+  extends React.InputHTMLAttributes<HTMLInputElement>, InputVarinats {
   type: "text" | "password" | "email" | "number" | "search";
-  }
+}
+
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className,variant, type, ...props }, ref) => {
+  ({ className, variant, type, ...props }, ref) => {
     return (
       <input
         type={type}
-        className={input({variant})}
+        className={cn(input({ variant }), className)}
         ref={ref}
         {...props}
       />
     )
   }
 )
-Input.displayName = "Input"
 
-export { Input }
+export interface InputWithIconProps extends InputProps {
+  prefixIcon?: React.ReactNode;
+  suffixIcon?: React.ReactNode;
+  prefixPadding?: string;
+  suffixPadding?: string;
+}
+
+const InputWithIcon = React.forwardRef<HTMLInputElement, InputWithIconProps>(
+  ({ className, prefixIcon, prefixPadding, suffixPadding, suffixIcon, variant, type, ...props }, ref) => {
+    const inputPadding = `${prefixIcon ? prefixPadding ? prefixPadding : "pl-10" : ""} ${suffixIcon ? suffixPadding ? suffixPadding : "pr-10" : ""}`;
+    return (
+      <div className={cn("relative gap-1 items-center flex", className)}>
+        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          {prefixIcon}
+        </div>
+        <input
+          className={cn(input({ variant }), inputPadding)}
+          type={type}
+          ref={ref}
+          {...props}
+        />
+        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+          {suffixIcon}
+        </div>
+      </div>
+    )
+  }
+)
+
+Input.displayName = "Input"
+InputWithIcon.displayName = "InputWithIcon"
+
+export { Input, InputWithIcon }
