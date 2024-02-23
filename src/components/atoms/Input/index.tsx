@@ -17,9 +17,9 @@ const input = tv({
     variant: "default",
   },
 })
-type InputVarinats = VariantProps<typeof input>;
+type InputVariants = VariantProps<typeof input>;
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>, InputVarinats {
+  extends React.InputHTMLAttributes<HTMLInputElement>, InputVariants {
   type: "text" | "password" | "email" | "number" | "search";
   prefixIcon?: React.ReactNode;
   suffixIcon?: React.ReactNode;
