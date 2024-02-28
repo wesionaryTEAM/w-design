@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
 import { cn } from "@/lib/utils";
-import { VariantProps, cva } from "class-variance-authority";
+import { VariantProps, tv } from "tailwind-variants";
 
-const variants = cva("switch", {
+const variants = tv({
   variants: {
     variant: {
       primary:
@@ -33,6 +33,8 @@ interface SwitchProps
   thumbClassName?: string;
   size?: "default" | "small";
   variant?: "primary" | "secondary" | "default";
+  invalid?: boolean;
+  disabled?: boolean;
 }
 
 const Switch = React.forwardRef<
@@ -47,6 +49,7 @@ const Switch = React.forwardRef<
       thumbClassName,
       size = "default",
       variant = "default",
+      invalid,
       ...props
     },
     ref
@@ -55,16 +58,21 @@ const Switch = React.forwardRef<
       <fieldset
         className='inline-flex items-center space-x-2'
         disabled={props?.disabled}
+        aria-disabled={props?.disabled}
+        aria-invalid={invalid}
       >
         <SwitchPrimitives.Root
+          aria-invalid={invalid}
+          aria-labelledby={props?.name}
+          {...props}
+          ref={ref}
           className={cn(
             "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50  dark:focus-visible:ring-slate-300 dark:focus-visible:ring-offset-slate-950 dark:data-[state=checked]:bg-slate-50 dark:data-[state=unchecked]:bg-slate-800",
             className,
             trackClassName,
-            variants({ size, variant })
+            variants({ size, variant }),
+            invalid ? "ring-destructive ring ring-offset-2" : "ring-0"
           )}
-          {...props}
-          ref={ref}
         >
           <SwitchPrimitives.Thumb
             className={cn(
@@ -75,7 +83,7 @@ const Switch = React.forwardRef<
           />
         </SwitchPrimitives.Root>
         {label && (
-          <label htmlFor={props?.id} className='text-sm font-medium'>
+          <label htmlFor={props?.name} className={cn("text-sm font-medium")}>
             {label}
           </label>
         )}
