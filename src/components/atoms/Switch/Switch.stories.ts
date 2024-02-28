@@ -64,3 +64,13 @@ export const SmallWithLabel: Story = {
     size: "small",
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    id: "switch-7",
+    name: "switch-7",
+    label: "Label",
+    size: "default",
+    disabled: true,
+  },
+};
