@@ -13,6 +13,10 @@ const loader = tv({
       large: "h-24 w-24",
       default: "h-10 w-10",
     },
+    direction: {
+      clockwise: "animate-spin",
+      "counter-clockwise": "animate-reverse-spin",
+    },
   },
 });
 
