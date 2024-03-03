@@ -73,3 +73,11 @@ export const Loader: React.FC<LoaderProps> = ({
     </div>
   );
 };
+
+/*
+TODO:
+1. Position of message text
+2. Sync size of loader and text
+3. Text color variant
+4. Fix loader hiding in small sizes
+*/
