@@ -16,7 +16,7 @@ const loader = tv({
     },
     messageSize: {
       small: "text-sm",
-      medium: "text-base",
+      medium: "text-md",
       large: "text-lg",
       default: "text-base",
     },
