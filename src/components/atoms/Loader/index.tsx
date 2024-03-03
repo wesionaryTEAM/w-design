@@ -35,7 +35,7 @@ export type LoaderProps = VariantProps<typeof loader> & {
 export const Loader: React.FC<LoaderProps> = ({
   variant = "default",
   size = "default",
-  message = "Loading...",
+  message,
   direction = "clockwise",
   messageSize = "default",
 }) => {
@@ -63,11 +63,13 @@ export const Loader: React.FC<LoaderProps> = ({
           strokeDashoffset='80'
         />
       </svg>
-      <span
-        className={cn("flex items-center justify-center", messageSizeClass)}
-      >
-        {message}
-      </span>
+      {message && (
+        <span
+          className={cn("flex items-center justify-center", messageSizeClass)}
+        >
+          {message}
+        </span>
+      )}
     </div>
   );
 };
