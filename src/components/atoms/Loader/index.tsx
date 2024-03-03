@@ -37,7 +37,7 @@ export const Loader: React.FC<LoaderProps> = ({
   const sizeClass = loader.variants.size[size];
 
   return (
-    <div className={cn("flex flex-col", sizeClass)}>
+    <div className={cn("flex flex-col items-center", sizeClass)}>
       <svg
         aria-hidden='true'
         className={cn("fill-current", variantClass, spinDirection)}
@@ -55,6 +55,7 @@ export const Loader: React.FC<LoaderProps> = ({
           strokeDashoffset='80'
         />
       </svg>
+      <span className='flex items-center justify-center'>{message}</span>
     </div>
   );
 };
