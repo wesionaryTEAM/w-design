@@ -31,5 +31,25 @@ export const Loader: React.FC<LoaderProps> = ({
   message = "Loading...",
   direction = "clockwise",
 }) => {
-  return <div></div>;
+  return (
+    <div>
+      <svg
+        aria-hidden='true'
+        className='fill-current'
+        viewBox='0 0 50 50'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        <circle
+          cx='25'
+          cy='25'
+          r='20'
+          stroke='currentColor'
+          strokeWidth='5'
+          fill='none'
+          strokeDasharray='125.6'
+          strokeDashoffset='80'
+        />
+      </svg>
+    </div>
+  );
 };
