@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { VariantProps, tv } from "tailwind-variants";
 
 const loader = tv({
@@ -31,11 +32,13 @@ export const Loader: React.FC<LoaderProps> = ({
   message = "Loading...",
   direction = "clockwise",
 }) => {
+  const variantClass = loader.variants.variant[variant];
+
   return (
     <div>
       <svg
         aria-hidden='true'
-        className='fill-current'
+        className={cn("fill-current", variantClass)}
         viewBox='0 0 50 50'
         xmlns='http://www.w3.org/2000/svg'
       >
