@@ -9,10 +9,10 @@ const loader = tv({
       default: "text-gray-500",
     },
     size: {
-      small: "h-12 w-12",
-      medium: "h-18 w-18",
-      large: "h-24 w-24",
-      default: "h-8 w-8",
+      small: "h-14 w-14",
+      medium: "h-16 w-16",
+      large: "h-18 w-18",
+      default: "h-12 w-12",
     },
     messageSize: {
       small: "text-sm",
