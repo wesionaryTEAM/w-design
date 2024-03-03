@@ -33,12 +33,13 @@ export const Loader: React.FC<LoaderProps> = ({
   direction = "clockwise",
 }) => {
   const variantClass = loader.variants.variant[variant];
+  const spinDirection = loader.variants.direction[direction];
 
   return (
     <div>
       <svg
         aria-hidden='true'
-        className={cn("fill-current", variantClass)}
+        className={cn("fill-current", variantClass, spinDirection)}
         viewBox='0 0 50 50'
         xmlns='http://www.w3.org/2000/svg'
       >
