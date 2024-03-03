@@ -24,3 +24,7 @@ export type LoaderProps = VariantProps<typeof loader> & {
   message?: string;
   direction?: "clockwise" | "counter-clockwise";
 };
+
+export const Loader: React.FC<LoaderProps> = ({}) => {
+  return <div></div>;
+};
