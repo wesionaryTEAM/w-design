@@ -9,10 +9,16 @@ const loader = tv({
       default: "text-gray-500",
     },
     size: {
-      small: "h-8 w-8",
-      medium: "h-12 w-12",
+      small: "h-12 w-12",
+      medium: "h-18 w-18",
       large: "h-24 w-24",
-      default: "h-10 w-10",
+      default: "h-8 w-8",
+    },
+    messageSize: {
+      small: "text-sm",
+      medium: "text-base",
+      large: "text-lg",
+      default: "text-base",
     },
     direction: {
       clockwise: "animate-spin",
@@ -31,10 +37,12 @@ export const Loader: React.FC<LoaderProps> = ({
   size = "default",
   message = "Loading...",
   direction = "clockwise",
+  messageSize = "default",
 }) => {
   const variantClass = loader.variants.variant[variant];
   const spinDirection = loader.variants.direction[direction];
   const sizeClass = loader.variants.size[size];
+  const messageSizeClass = loader.variants.messageSize[messageSize];
 
   return (
     <div className={cn("flex flex-col items-center", sizeClass)}>
@@ -55,7 +63,11 @@ export const Loader: React.FC<LoaderProps> = ({
           strokeDashoffset='80'
         />
       </svg>
-      <span className='flex items-center justify-center'>{message}</span>
+      <span
+        className={cn("flex items-center justify-center", messageSizeClass)}
+      >
+        {message}
+      </span>
     </div>
   );
 };
