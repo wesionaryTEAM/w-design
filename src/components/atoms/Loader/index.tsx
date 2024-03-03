@@ -34,9 +34,10 @@ export const Loader: React.FC<LoaderProps> = ({
 }) => {
   const variantClass = loader.variants.variant[variant];
   const spinDirection = loader.variants.direction[direction];
+  const sizeClass = loader.variants.size[size];
 
   return (
-    <div>
+    <div className={cn("flex flex-col", sizeClass)}>
       <svg
         aria-hidden='true'
         className={cn("fill-current", variantClass, spinDirection)}
