@@ -45,7 +45,7 @@ export const Loader: React.FC<LoaderProps> = ({
   const messageSizeClass = loader.variants.messageSize[messageSize];
 
   return (
-    <div role='status' className={cn("flex flex-col items-center", sizeClass)}>
+    <div role='status' className={cn("flex  flex-col items-center", sizeClass)}>
       <svg
         aria-hidden='true'
         className={cn("fill-current", variantClass, spinDirection)}
