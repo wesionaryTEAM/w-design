@@ -10,7 +10,6 @@ const meta: Meta<typeof Progress> = {
         type: "number",
         min: 0,
         max: 100,
-        defaultValue: 30,
       },
       description: "The value of the progress bar",
     },
@@ -26,11 +25,33 @@ const meta: Meta<typeof Progress> = {
       defaultValue: "sm",
       description: "The size of the progress bar",
     },
+    max: {
+      description: "The maximum value of the progress bar",
+    },
+    min: {
+      description: "The minimum value of the progress bar",
+    },
+    indicatorClassName: {
+      description: "The css class value for progress indicator",
+    },
+    percentageClass: {
+      description: "The css class value for progress percentage",
+    },
     showPercentage: {
       description: "Show the percentage of the progress",
     },
     isRounded: {
       description: "Make the progress bar rounded",
+    },
+    asChild: {
+      table: {
+        disable: true
+      }
+    },
+    fontSize: {
+      table: {
+        disable: true
+      }
     },
   },
   tags: ["autodocs"],
@@ -47,7 +68,6 @@ export const Default: Story = {
     size: "sm",
     showPercentage: false,
     isRounded: true,
-    asChild: false,
   },
 };
 
