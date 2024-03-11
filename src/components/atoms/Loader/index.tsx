@@ -3,7 +3,7 @@ import { VariantProps, tv } from "tailwind-variants";
 
 const loader = tv({
   variants: {
-    variant: {
+    color: {
       primary: "text-blue-500",
       secondary: "text-green-500",
       default: "text-gray-500",
@@ -33,13 +33,13 @@ export type LoaderProps = VariantProps<typeof loader> & {
 };
 
 export const Loader: React.FC<LoaderProps> = ({
-  variant = "default",
+  color = "default",
   size = "default",
   message,
   direction = "clockwise",
   messageSize = "default",
 }) => {
-  const variantClass = loader.variants.variant[variant];
+  const variantClass = loader.variants.color[color];
   const spinDirection = loader.variants.direction[direction];
   const sizeClass = loader.variants.size[size];
   const messageSizeClass = loader.variants.messageSize[messageSize];
