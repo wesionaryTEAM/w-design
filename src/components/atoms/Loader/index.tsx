@@ -44,6 +44,7 @@ export const Loader: React.FC<LoaderProps> = ({
   direction,
   messageSize,
 }) => {
+  console.log(loader({ size }));
   return (
     <div
       role='status'
