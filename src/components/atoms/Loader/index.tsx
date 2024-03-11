@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { VariantProps, tv } from "tailwind-variants";
 
 const loader = tv({
+  base: "flex items-center justify-center",
   variants: {
     color: {
       primary: "text-blue-500",
@@ -24,6 +25,12 @@ const loader = tv({
       clockwise: "animate-spin",
       "counter-clockwise": "animate-reverse-spin",
     },
+  },
+  defaultVariants: {
+    color: "default",
+    size: "default",
+    messageSize: "default",
+    direction: "clockwise",
   },
 });
 
