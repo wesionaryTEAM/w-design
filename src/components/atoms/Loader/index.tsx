@@ -25,7 +25,7 @@ const circleStyles = tv({
   },
 });
 
-const textStyles = {
+const textStyles = tv({
   base: "text-gray-500",
   variants: {
     size: {
@@ -37,7 +37,7 @@ const textStyles = {
   defaultVariants: {
     size: "medium",
   },
-};
+});
 
 const rootStyles = tv({
   base: "flex flex-col items-center",
@@ -89,8 +89,8 @@ export const Loader: React.FC<LoaderProps> = ({
       {message && (
         <span
           className={cn(
-            "flex items-center justify-center",
-            loader({ messageSize })
+            "mt-2",
+            textStyles({ size: size === "small" ? "small" : "medium" })
           )}
         >
           {message}
