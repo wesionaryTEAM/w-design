@@ -17,7 +17,6 @@ const loader = tv({
       small: "text-sm",
       medium: "text-md",
       large: "text-lg",
-      default: "text-base",
     },
     direction: {
       clockwise: "animate-spin",
@@ -27,7 +26,7 @@ const loader = tv({
   defaultVariants: {
     color: "primary",
     size: "medium",
-    messageSize: "default",
+    messageSize: "medium",
     direction: "clockwise",
   },
 });
