@@ -50,12 +50,28 @@ const meta: Meta<typeof Progress> = {
     },
     isRounded: {
       description: "Make the progress bar rounded",
+      control: {
+        type: "boolean",
+        defaultValue: true,
+      },
     },
     valueUnit: {
       description: "The unit of the value",
       control: {
         type: "text",
         defaultValue: "%",
+      },
+    },
+    error: {
+      description: "The error message",
+      control: {
+        type: "text",
+      },
+    },
+    errorClassName: {
+      description: "The css class value for error",
+      control: {
+        type: "text",
       },
     },
     indicatorClassName: {
@@ -126,5 +142,19 @@ export const Medium: Story = {
   args: {
     ...Default.args,
     size: "md",
+  },
+};
+
+export const WithValue: Story = {
+  args: {
+    ...Default.args,
+    showValue: true,
+  },
+};
+
+export const WithError: Story = {
+  args: {
+    ...Default.args,
+    error: "Error message",
   },
 };
