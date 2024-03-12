@@ -59,6 +59,7 @@ type TCircleStyles = VariantProps<typeof circleStyles>;
 export type LoaderProps = TCircleStyles & {
   message?: string;
   direction?: "clockwise" | "counter-clockwise";
+  className?: string;
 };
 
 export const Loader: React.FC<LoaderProps> = ({
@@ -66,11 +67,16 @@ export const Loader: React.FC<LoaderProps> = ({
   size,
   message,
   direction,
+  className,
 }) => {
   return (
     <div
       role='status'
-      className={cn("flex  flex-col items-center", rootStyles({ size }))}
+      className={cn(
+        "flex  flex-col items-center",
+        rootStyles({ size }),
+        className
+      )}
     >
       <svg
         aria-hidden='true'
