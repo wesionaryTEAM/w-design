@@ -54,7 +54,9 @@ const rootStyles = tv({
   },
 });
 
-export type LoaderProps = VariantProps<typeof circleStyles> & {
+type TCircleStyles = VariantProps<typeof circleStyles>;
+
+export type LoaderProps = TCircleStyles & {
   message?: string;
   direction?: "clockwise" | "counter-clockwise";
 };
