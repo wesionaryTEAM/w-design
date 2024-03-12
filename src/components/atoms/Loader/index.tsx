@@ -20,8 +20,8 @@ const circleStyles = tv({
     },
   },
   defaultVariants: {
-    color: "primary",
-    size: "medium",
+    color: "default",
+    size: "small",
     direction: "clockwise",
   },
 });
