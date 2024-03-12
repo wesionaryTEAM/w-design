@@ -32,14 +32,10 @@ const root = tv({
     size: {
       sm: "h-4",
       md: "h-6",
-      lg: "h-8",
-      xl: "h-10",
     },
     fontSize: {
       sm: "text-xs",
       md: "text-sm",
-      lg: "text-base",
-      xl: "text-lg",
     },
     isRounded: {
       true: "rounded-full",
@@ -61,10 +57,11 @@ export interface ProgressProps extends ProgressVariant,
   min?: number;
   indicatorClassName?: string;
   variant?: "default" | "primary" | "secondary"
-  size?: "sm" | "md" | "lg" | "xl"
-  showPercentage?: boolean
+  size?: "sm" | "md" 
+  showValue?: boolean
   isRounded?: boolean
-  percentageClass?: string
+  valueClass?: string
+  valueUnit?: string
 }
 
 export const Progress = React.forwardRef<
@@ -78,8 +75,9 @@ export const Progress = React.forwardRef<
   variant = "default",
   min = 0,
   max = 100,
-  percentageClass,
-  showPercentage = false,
+  valueClass,
+  valueUnit="%",
+  showValue = false,
   isRounded = false,
   ...props
 }, ref) => {
@@ -92,13 +90,13 @@ export const Progress = React.forwardRef<
       className={cn(indicator({ variant }), indicatorClassName)}
       style={{ transform: `translateX(-${max - (value ?? min)}%)` }}
     />
-    {showPercentage && <div className={cn(
+    {showValue && <div className={cn(
       "absolute inset-0 invert-0 flex justify-center items-center",
       root.variants.fontSize[size],
       (value ?? 0) >= Math.round(max / 2) ? "text-white" : "text-slate-900",
-      percentageClass
+      valueClass
     )}>
-      {`${value ? value.toFixed(0) : 0}%`}
+      {`${value ? value.toFixed(0) : 0}${valueUnit}`}
     </div>}
   </ProgressPrimitive.Root>
 })
