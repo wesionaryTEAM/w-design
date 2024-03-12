@@ -39,6 +39,20 @@ const textStyles = {
   },
 };
 
+const rootStyles = tv({
+  base: "flex flex-col items-center",
+  variants: {
+    size: {
+      small: "h-14",
+      medium: "h-16",
+      large: "h-18",
+    },
+  },
+  defaultVariants: {
+    size: "medium",
+  },
+});
+
 export type LoaderProps = VariantProps<typeof circleStyles> & {
   message?: string;
   direction?: "clockwise" | "counter-clockwise";
