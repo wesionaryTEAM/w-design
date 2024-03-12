@@ -60,6 +60,7 @@ export type LoaderProps = TCircleStyles & {
   message?: string;
   direction?: "clockwise" | "counter-clockwise";
   className?: string;
+  messageClassName?: string;
 };
 
 export const Loader: React.FC<LoaderProps> = ({
@@ -68,6 +69,7 @@ export const Loader: React.FC<LoaderProps> = ({
   message,
   direction,
   className,
+  messageClassName,
 }) => {
   return (
     <div
@@ -95,7 +97,11 @@ export const Loader: React.FC<LoaderProps> = ({
           strokeDashoffset='80'
         />
       </svg>
-      {message && <span className={cn(textStyles({ size }))}>{message}</span>}
+      {message && (
+        <span className={cn(textStyles({ size }), messageClassName)}>
+          {message}
+        </span>
+      )}
     </div>
   );
 };
