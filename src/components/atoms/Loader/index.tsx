@@ -67,7 +67,7 @@ export const Loader: React.FC<LoaderProps> = ({
   return (
     <div
       role='status'
-      className={cn("flex  flex-col items-center", loader({ size }))}
+      className={cn("flex  flex-col items-center", rootStyles({ size }))}
     >
       <svg
         aria-hidden='true'
