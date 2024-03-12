@@ -57,11 +57,13 @@ export interface ProgressProps extends ProgressVariant,
   min?: number;
   indicatorClassName?: string;
   variant?: "default" | "primary" | "secondary"
-  size?: "sm" | "md" 
+  size?: "sm" | "md"
   showValue?: boolean
   isRounded?: boolean
   valueClass?: string
   valueUnit?: string
+  error?: string
+  errorClassName?: string
 }
 
 export const Progress = React.forwardRef<
@@ -76,27 +78,30 @@ export const Progress = React.forwardRef<
   min = 0,
   max = 100,
   valueClass,
-  valueUnit="%",
+  valueUnit = "%",
   showValue = false,
   isRounded = false,
   ...props
 }, ref) => {
-  return <ProgressPrimitive.Root
-    ref={ref}
-    className={cn(root({ variant, size, isRounded }), className)}
-    {...props}
-  >
-    <ProgressPrimitive.Indicator
-      className={cn(indicator({ variant }), indicatorClassName)}
-      style={{ transform: `translateX(-${max - (value ?? min)}%)` }}
-    />
-    {showValue && <div className={cn(
-      "absolute inset-0 invert-0 flex justify-center items-center",
-      root.variants.fontSize[size],
-      (value ?? 0) >= Math.round(max / 2) ? "text-white" : "text-slate-900",
-      valueClass
-    )}>
-      {`${value ? value.toFixed(0) : 0}${valueUnit}`}
-    </div>}
-  </ProgressPrimitive.Root>
+  return <>
+    <ProgressPrimitive.Root
+      ref={ref}
+      className={cn(root({ variant, size, isRounded }), className)}
+      {...props}
+    >
+      <ProgressPrimitive.Indicator
+        className={cn(indicator({ variant }), indicatorClassName)}
+        style={{ transform: `translateX(-${max - (value ?? min)}%)` }}
+      />
+      {showValue && <div className={cn(
+        "absolute inset-0 invert-0 flex justify-center items-center",
+        root.variants.fontSize[size],
+        (value ?? 0) >= Math.round(max / 2) ? "text-white" : "text-slate-900",
+        valueClass
+      )}>
+        {`${value ? value.toFixed(0) : 0}${valueUnit}`}
+      </div>}
+    </ProgressPrimitive.Root>
+    {props.error && <div className={cn("mt-2 text-red-500 text-xs text-center", props.errorClassName)}>{props.error}</div>}
+  </>
 })
