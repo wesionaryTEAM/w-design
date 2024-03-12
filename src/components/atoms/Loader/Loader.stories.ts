@@ -25,6 +25,13 @@ export const Large: Story = {
   },
 };
 
+export const LargeWith2CircleWidth: Story = {
+  args: {
+    size: "large",
+    circleWidth: 2,
+  },
+};
+
 export const PrimaryWithLoadingMessage: Story = {
   args: {
     color: "primary",
