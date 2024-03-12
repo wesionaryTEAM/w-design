@@ -10,8 +10,8 @@ const circleStyles = tv({
     },
     size: {
       small: "h-14 w-14",
-      medium: "h-16 w-16",
-      large: "h-18 w-18",
+      medium: "h-15 w-15",
+      large: "h-16 w-16",
     },
     direction: {
       clockwise: "animate-spin",
@@ -43,9 +43,9 @@ const rootStyles = tv({
   base: "flex flex-col items-center",
   variants: {
     size: {
-      small: "h-14",
-      medium: "h-16",
-      large: "h-18",
+      small: "h-19",
+      medium: "h-20",
+      large: "h-21",
     },
   },
   defaultVariants: {
