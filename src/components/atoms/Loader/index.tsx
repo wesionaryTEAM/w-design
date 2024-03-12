@@ -26,7 +26,7 @@ const circleStyles = tv({
 });
 
 const textStyles = tv({
-  base: "text-gray-500",
+  base: "text-gray-500 mt-2",
   variants: {
     size: {
       small: "text-sm",
@@ -86,16 +86,7 @@ export const Loader: React.FC<LoaderProps> = ({
           strokeDashoffset='80'
         />
       </svg>
-      {message && (
-        <span
-          className={cn(
-            "mt-2",
-            textStyles({ size: size === "small" ? "small" : "medium" })
-          )}
-        >
-          {message}
-        </span>
-      )}
+      {message && <span className={cn(textStyles({ size }))}>{message}</span>}
     </div>
   );
 };
