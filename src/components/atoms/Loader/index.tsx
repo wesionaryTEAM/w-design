@@ -61,6 +61,7 @@ export type LoaderProps = TCircleStyles & {
   direction?: "clockwise" | "counter-clockwise";
   className?: string;
   messageClassName?: string;
+  circleWidth?: number;
 };
 
 export const Loader: React.FC<LoaderProps> = ({
@@ -70,6 +71,7 @@ export const Loader: React.FC<LoaderProps> = ({
   direction,
   className,
   messageClassName,
+  circleWidth,
 }) => {
   return (
     <div
@@ -91,7 +93,7 @@ export const Loader: React.FC<LoaderProps> = ({
           cy='25'
           r='20'
           stroke='currentColor'
-          strokeWidth='5'
+          strokeWidth={circleWidth || 5}
           fill='none'
           strokeDasharray='125.6'
           strokeDashoffset='80'
