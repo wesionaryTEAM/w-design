@@ -7,6 +7,7 @@ const circleStyles = tv({
     color: {
       primary: "text-primary-500",
       secondary: "text-secondary-500",
+      default: "text-slate-500",
     },
     size: {
       small: "h-12 w-12",
