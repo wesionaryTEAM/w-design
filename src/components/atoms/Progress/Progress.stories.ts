@@ -13,6 +13,22 @@ const meta: Meta<typeof Progress> = {
       },
       description: "The value of the progress bar",
     },
+    max: {
+      description: "The maximum value of the progress bar",
+      control: {
+        type: "number",
+        min: 0,
+        max: 100,
+      },
+    },
+    min: {
+      description: "The minimum value of the progress bar",
+      control: {
+        type: "number",
+        min: 0,
+        max: 100,
+      },
+    },
     variant: {
       options: ["default", "primary", "secondary"],
       control: { type: "radio" },
@@ -20,38 +36,49 @@ const meta: Meta<typeof Progress> = {
       description: "The variant of the progress bar",
     },
     size: {
-      options: ["sm", "md", "lg", "xl"],
+      options: ["sm", "md"],
       control: { type: "radio" },
       defaultValue: "sm",
       description: "The size of the progress bar",
     },
-    max: {
-      description: "The maximum value of the progress bar",
-    },
-    min: {
-      description: "The minimum value of the progress bar",
-    },
-    indicatorClassName: {
-      description: "The css class value for progress indicator",
-    },
-    percentageClass: {
-      description: "The css class value for progress percentage",
-    },
-    showPercentage: {
-      description: "Show the percentage of the progress",
+    showValue: {
+      description: "Show the value of the progress",
+      control: {
+        type: "boolean",
+        defaultValue: false,
+      },
     },
     isRounded: {
       description: "Make the progress bar rounded",
     },
+    valueUnit: {
+      description: "The unit of the value",
+      control: {
+        type: "text",
+        defaultValue: "%",
+      },
+    },
+    indicatorClassName: {
+      description: "The css class value for progress indicator",
+      control: {
+        type: "text",
+      },
+    },
+    valueClass: {
+      description: "The css class value for progress",
+      control: {
+        type: "text",
+      },
+    },
     asChild: {
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     fontSize: {
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
   },
   tags: ["autodocs"],
@@ -64,10 +91,13 @@ type Story = StoryObj<typeof Progress>;
 export const Default: Story = {
   args: {
     value: 30,
+    min: 0,
+    max: 100,
     variant: "default",
     size: "sm",
-    showPercentage: false,
+    showValue: false,
     isRounded: true,
+    valueUnit: "%",
   },
 };
 
@@ -96,19 +126,5 @@ export const Medium: Story = {
   args: {
     ...Default.args,
     size: "md",
-  },
-};
-
-export const Large: Story = {
-  args: {
-    ...Default.args,
-    size: "lg",
-  },
-};
-
-export const ExtraLarge: Story = {
-  args: {
-    ...Default.args,
-    size: "xl",
   },
 };
