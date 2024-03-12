@@ -14,7 +14,7 @@ type Story = StoryObj<typeof Loader>;
 
 export const Default: Story = {};
 
-export const Primary: Story = {
+export const PrimaryWithLoadingMessage: Story = {
   args: {
     color: "primary",
     message: "Loading...",
@@ -23,17 +23,16 @@ export const Primary: Story = {
   },
 };
 
-export const Secondary: Story = {
+export const SecondaryInAntiClockDirectionMovement: Story = {
   args: {
     color: "secondary",
-    message: "Please wait...",
     direction: "counter-clockwise",
   },
 };
 
-export const Small: Story = {
+export const MediumWithLoadingMessage: Story = {
   args: {
-    size: "small",
+    size: "medium",
     message: "Loading...",
     direction: "clockwise",
   },
