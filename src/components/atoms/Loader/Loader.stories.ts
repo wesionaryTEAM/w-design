@@ -14,7 +14,7 @@ type Story = StoryObj<typeof Loader>;
 
 export const Primary: Story = {
   args: {
-    variant: "primary",
+    color: "primary",
     message: "Loading...",
     direction: "clockwise",
   },
@@ -22,7 +22,7 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   args: {
-    variant: "secondary",
+    color: "secondary",
     message: "Please wait...",
     direction: "counter-clockwise",
   },
