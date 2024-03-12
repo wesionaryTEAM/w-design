@@ -71,7 +71,7 @@ export const Loader: React.FC<LoaderProps> = ({
     >
       <svg
         aria-hidden='true'
-        className={cn("fill-current", loader({ color, size, direction }))}
+        className={cn(circleStyles({ color, size, direction }))}
         viewBox='0 0 50 50'
         xmlns='http://www.w3.org/2000/svg'
       >
