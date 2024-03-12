@@ -12,6 +12,8 @@ export default meta;
 
 type Story = StoryObj<typeof Loader>;
 
+export const Default: Story = {};
+
 export const Primary: Story = {
   args: {
     color: "primary",
