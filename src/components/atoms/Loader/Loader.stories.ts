@@ -17,6 +17,7 @@ export const Primary: Story = {
     color: "primary",
     message: "Loading...",
     direction: "clockwise",
+    size: "medium",
   },
 };
 
