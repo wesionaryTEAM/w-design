@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 import { VariantProps, tv } from "tailwind-variants";
 
-const loader = tv({
-  base: "flex items-center justify-center",
+const circleStyles = tv({
+  base: "fill-current",
   variants: {
     color: {
       primary: "text-gray-500",
@@ -13,11 +13,6 @@ const loader = tv({
       medium: "h-16 w-16",
       large: "h-18 w-18",
     },
-    messageSize: {
-      small: "text-sm",
-      medium: "text-md",
-      large: "text-lg",
-    },
     direction: {
       clockwise: "animate-spin",
       "counter-clockwise": "animate-reverse-spin",
@@ -26,12 +21,25 @@ const loader = tv({
   defaultVariants: {
     color: "primary",
     size: "medium",
-    messageSize: "medium",
     direction: "clockwise",
   },
 });
 
-export type LoaderProps = VariantProps<typeof loader> & {
+const textStyles = {
+  base: "text-gray-500",
+  variants: {
+    size: {
+      small: "text-sm",
+      medium: "text-base",
+      large: "text-lg",
+    },
+  },
+  defaultVariants: {
+    size: "medium",
+  },
+};
+
+export type LoaderProps = VariantProps<typeof circleStyles> & {
   message?: string;
   direction?: "clockwise" | "counter-clockwise";
 };
@@ -41,9 +49,7 @@ export const Loader: React.FC<LoaderProps> = ({
   size,
   message,
   direction,
-  messageSize,
 }) => {
-  console.log(loader({ size }));
   return (
     <div
       role='status'
