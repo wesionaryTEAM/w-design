@@ -62,6 +62,7 @@ export type LoaderProps = TCircleStyles & {
   className?: string;
   messageClassName?: string;
   circleWidth?: number;
+  children?: React.ReactNode;
 };
 
 export const Loader: React.FC<LoaderProps> = ({
@@ -72,6 +73,7 @@ export const Loader: React.FC<LoaderProps> = ({
   className,
   messageClassName,
   circleWidth,
+  children,
 }) => {
   return (
     <div
