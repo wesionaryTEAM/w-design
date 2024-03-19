@@ -84,23 +84,27 @@ export const Loader: React.FC<LoaderProps> = ({
         className
       )}
     >
-      <svg
-        aria-hidden='true'
-        className={cn(circleStyles({ color, size, direction }))}
-        viewBox='0 0 50 50'
-        xmlns='http://www.w3.org/2000/svg'
-      >
-        <circle
-          cx='25'
-          cy='25'
-          r='20'
-          stroke='currentColor'
-          strokeWidth={circleWidth || 5}
-          fill='none'
-          strokeDasharray='125.6'
-          strokeDashoffset='80'
-        />
-      </svg>
+      {children ? (
+        <div className={cn(className)}>{children}</div>
+      ) : (
+        <svg
+          aria-hidden='true'
+          className={cn(circleStyles({ color, size, direction }))}
+          viewBox='0 0 50 50'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <circle
+            cx='25'
+            cy='25'
+            r='20'
+            stroke='currentColor'
+            strokeWidth={circleWidth || 5}
+            fill='none'
+            strokeDasharray='125.6'
+            strokeDashoffset='80'
+          />
+        </svg>
+      )}
       {message && (
         <span className={cn(textStyles({ size }), messageClassName)}>
           {message}
