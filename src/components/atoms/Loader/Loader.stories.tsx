@@ -138,5 +138,4 @@ export const WithCustomIcon: Story = {
       </svg>
     ),
   },
-  // decorators: [Story => <div style={{ color: "black" }}>{Story()}</div>],
 };
