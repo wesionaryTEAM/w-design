@@ -1,17 +1,20 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { Label } from "..";
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   showCount?: boolean;
+  label?: string;
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, onChange, showCount, ...props }, ref) => {
+  ({ className, onChange, showCount,label, ...props }, ref) => {
     const [value, setValue] = React.useState(props.value);
     return (
       <>
+        {label && <Label htmlFor={props.id}>{label}</Label>}
         <textarea
           onChange={e => {
             setValue(e.target.value);

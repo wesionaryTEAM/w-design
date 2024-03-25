@@ -45,6 +45,18 @@ export const Number: InputStory = {
   },
 };
 
+export const WithLabel: InputStory = {
+  args: {
+    label: 'Label',
+    variant: "default",
+    disabled: false,
+    type: 'text',
+    placeholder: 'Label With Count Input',
+    showCount: true,
+  },
+};
+
+
 export const WithCountNoMaxLength: InputStory = {
   args: {
     variant: "default",
