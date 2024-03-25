@@ -18,3 +18,20 @@ export const Text: Story = {
     placeholder: 'Text Input',
   },
 };
+
+export const WithCountNoMaxLength: Story = {
+  args: {
+    disabled: false,
+    placeholder: 'Text Input',
+    showCount: true,
+  },
+};
+
+export const WithCount: Story = {
+  args: {
+    disabled: false,
+    placeholder: 'Text Input',
+    showCount: true,
+    maxLength: 10,
+  },
+};

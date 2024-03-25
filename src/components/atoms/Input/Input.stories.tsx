@@ -44,6 +44,30 @@ export const Number: InputStory = {
     placeholder: 'Number Input',
   },
 };
+
+export const WithCountNoMaxLength: InputStory = {
+  args: {
+    variant: "default",
+    disabled: false,
+    type: 'text',
+    placeholder: 'With Count Input',
+    showCount: true,
+  },
+};
+
+
+export const WithCount: InputStory = {
+  args: {
+    variant: "default",
+    disabled: false,
+    type: 'text',
+    placeholder: 'With Count Input',
+    showCount: true,
+    maxLength: 10,
+  },
+};
+
+
 export const Search: InputStory = {
   args: {
     variant: "default",
