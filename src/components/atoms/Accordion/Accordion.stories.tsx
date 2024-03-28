@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from ".";
+import { Download } from "lucide-react";
 
 const meta: Meta<typeof Accordion> = {
   title: "Design System/Atoms/Accordion",
@@ -19,7 +20,7 @@ const AccordionTemplate: Story = {
     return (
       <Accordion type='single' defaultValue='item-1' collapsible>
         <AccordionItem value='item-1'>
-          <AccordionTrigger chevronPosition='start'>
+          <AccordionTrigger chevron={<Download />} chevronPosition='start'>
             Is it accessible?
           </AccordionTrigger>
           <AccordionContent>
