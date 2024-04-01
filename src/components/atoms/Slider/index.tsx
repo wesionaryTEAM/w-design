@@ -114,7 +114,7 @@ export const Slider = React.forwardRef<
     suffixIcon,
     ...props
 }, ref) => {
-    const orientation = isVertical == true ? "flex-col w-full" : "flex h-full";
+    const orientation = isVertical == true ? "flex-col w-full" : `flex h-full`;
     const [sliderValue, setSliderValue] = React.useState(value ?? props.defaultValue)
     return <>
         <div className={`relative ${orientation}`}>
