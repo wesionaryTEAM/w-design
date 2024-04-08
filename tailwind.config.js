@@ -14,6 +14,12 @@ export default withTV({
       },
     },
     extend: {
+      colors:{
+        primary: "#0F172A",
+        destructive:"#EF4444",
+        accent:"#F1F5F9",
+        secondary:"#F1F5F9",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
