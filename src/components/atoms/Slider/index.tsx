@@ -78,7 +78,7 @@ export interface SliderProps extends SliderVariant,
     rangeClassName?: string;
     thumbClassName?: string;
     isVertical?: boolean;
-    verticalHeight: number;
+    verticalHeight?: string;
     prefixIcon?: React.ReactNode;
     suffixIcon?: React.ReactNode;
     error?: string;
@@ -105,8 +105,8 @@ export const Slider = React.forwardRef<
     value,
     isRounded = true,
     showValue,
-    isVertical = true,
-    verticalHeight = 200,
+    isVertical = false,
+    verticalHeight,
     trackClassName,
     rangeClassName,
     thumbClassName,
@@ -114,18 +114,22 @@ export const Slider = React.forwardRef<
     suffixIcon,
     ...props
 }, ref) => {
-    const orientation = isVertical == true ? "flex-col w-full" : `flex h-full`;
+    const orientation = isVertical ? "flex-col w-full" : `flex h-full`;
     const [sliderValue, setSliderValue] = React.useState(value ?? props.defaultValue)
+    if (verticalHeight && !verticalHeight.includes("px")) {
+        throw new Error("verticalHeight should be in px")
+    }
+
     return <>
         <div className={`relative ${orientation}`}>
-            {prefixIcon && isVertical == false && <div className="relative inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            {prefixIcon && !isVertical && <div className="relative inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 {prefixIcon}
             </div>}
             <SliderPrimitive.Root
                 ref={ref}
                 className={cn(
                     "relative flex w-full touch-none select-none items-center",
-                    isVertical ? `flex-col h-[${verticalHeight}px]` : "flex-row",
+                    isVertical ? `flex-col h-[200px]` : "flex-row",
                     className
                 )}
                 value={sliderValue}
@@ -136,14 +140,14 @@ export const Slider = React.forwardRef<
                 <SliderPrimitive.Track className={
                     cn(
                         track({ variant, size, isRounded }),
-                        isVertical == true ? `!h-[${verticalHeight}px] w-3` : "w-full",
+                        isVertical ? `!h-[${verticalHeight}px] w-3` : "w-full",
                         size == "md" && isVertical && `!h-[${verticalHeight}px] w-5`,
                         trackClassName
                     )
                 }>
                     <SliderPrimitive.Range className={cn(
                         range({ variant }),
-                        isVertical == true ? `!h-[${verticalHeight}px] w-3` : "w-full",
+                        isVertical ? `!h-[${verticalHeight}px] w-3` : "w-full",
                         size == "md" && isVertical && `!h-[${verticalHeight}px] w-5`,
                         rangeClassName
                     )
@@ -152,14 +156,14 @@ export const Slider = React.forwardRef<
                 <SliderPrimitive.Thumb className={
                     cn(
                         thumb({ variant, size, isRounded }),
-                        isVertical == true && size == "sm" && "w-5",
-                        isVertical == true && size == "md" && "w-7",
+                        isVertical && size == "sm" && "w-5",
+                        isVertical && size == "md" && "w-7",
                         thumbClassName
                     )} />
             </SliderPrimitive.Root>
             {showValue &&
                 (
-                    isVertical == true ? <div className="items-center justify-center flex">
+                    isVertical ? <div className="items-center justify-center flex">
                         <SliderValue
                             className={cn(
                                 track.variants.variant[variant ?? 'default'],
@@ -177,7 +181,7 @@ export const Slider = React.forwardRef<
                         />
                 )
             }
-            {suffixIcon && isVertical == false && <div className="relative inset-y-0 left-1 flex items-center pr-3 pointer-events-none">
+            {suffixIcon && !isVertical && <div className="relative inset-y-0 left-1 flex items-center pr-3 pointer-events-none">
                 {suffixIcon}
             </div>}
         </div>
