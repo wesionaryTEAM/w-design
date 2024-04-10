@@ -1,5 +1,6 @@
 export * from "./Button"
 export * from "./Shimmer"
+export * from "./Slider"
 export * from "./Progress"
 export * from "./Input"
 export * from "./TextArea"
