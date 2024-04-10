@@ -172,6 +172,18 @@ export const VerticalWithValue: Story = {
     max: 100,
     step: 10,
   },
+  decorators: [
+    (Story) => (
+      <div style={{
+        height: "200px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
+        <Story />
+      </div>
+    ),
+  ]
 };
 
 export const WithIcons: Story = {
@@ -181,6 +193,7 @@ export const WithIcons: Story = {
     min: 0,
     max: 100,
     step: 10,
+    showValue: true,
     prefixIcon: <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8a5 5 0 0 1 0 8m-9-1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2l3.5-4.5A.8.8 0 0 1 11 5v14a.8.8 0 0 1-1.5.5z" /></svg>,
     suffixIcon: <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8a5 5 0 0 1 0 8m2.7-11a9 9 0 0 1 0 14M6 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2l3.5-4.5A.8.8 0 0 1 11 5v14a.8.8 0 0 1-1.5.5z" /></svg>
   },
@@ -194,18 +207,5 @@ export const WithError: Story = {
     step: 10,
     isVertical: false,
     error: "This is an error message",
-  },
-};
-
-// WIP
-export const WithItemRange: Story = {
-  args: {
-    size: "sm",
-    min: 0,
-    max: 100,
-    step: 10,
-    defaultValue:[10, 30],
-    isVertical: false,
-    rangeClassName: "bg-blue-200",
   },
 };
