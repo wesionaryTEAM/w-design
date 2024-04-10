@@ -39,6 +39,8 @@ export default withTV({
           900: "#164e63",
           DEFAULT: "#06b6d4",
         },
+        destructive:"#EF4444",
+        accent:"#F1F5F9",
       },
       keyframes: {
         "accordion-down": {
