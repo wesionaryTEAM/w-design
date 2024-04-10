@@ -1,4 +1,5 @@
 export * from "./Button"
+export * from "./Slider"
 export * from "./Progress"
 export * from "./Input"
 export * from "./TextArea"
