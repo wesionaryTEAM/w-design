@@ -19,8 +19,9 @@ const meta: Meta<typeof Slider> = {
       description: "The step value of the slider",
     },
     verticalHeight: {
-      description: "The height of the vertical slider",
-      control: { type: "number", defaultValue: 200 },
+      description: "The height of the vertical slider in px",
+      control: { type: "text", defaultValue: "200px" },
+      defaultValue: "200px",
     },
     variant: {
       options: ["default", "primary", "secondary"],
@@ -114,7 +115,6 @@ export const Default: Story = {
     variant: "default",
     size: "sm",
     showValue: false,
-    isVertical: false,
   },
 };
 
@@ -123,7 +123,6 @@ export const Primary: Story = {
   args: {
     size: "sm",
     variant: "primary",
-    isVertical: false,
     min: 0,
     max: 100,
     step: 10,
@@ -134,7 +133,6 @@ export const Secondary: Story = {
   args: {
     size: "sm",
     variant: "secondary",
-    isVertical: false,
     min: 0,
     max: 100,
     step: 10,
@@ -144,7 +142,6 @@ export const Secondary: Story = {
 export const Medium: Story = {
   args: {
     size: "md",
-    isVertical: false,
     min: 0,
     max: 100,
     step: 10,
@@ -155,30 +152,27 @@ export const NotRounded: Story = {
   args: {
     size: "sm",
     isRounded: false,
-    isVertical: false,
     min: 0,
     max: 100,
     step: 10,
   },
 };
 
-export const VerticalWithValue: Story = {
+export const VerticalWithValueAndError: Story = {
   args: {
     size: "sm",
     isVertical: true,
-    verticalHeight: 200,
+    verticalHeight: "200px",
     showValue: true,
     min: 0,
     max: 100,
     step: 10,
+    error: "This is an error message",
   },
   decorators: [
     (Story) => (
       <div style={{
-        height: "200px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
+        height: "250px",
       }}>
         <Story />
       </div>
@@ -189,7 +183,6 @@ export const VerticalWithValue: Story = {
 export const WithIcons: Story = {
   args: {
     size: "sm",
-    isVertical: false,
     min: 0,
     max: 100,
     step: 10,
@@ -205,7 +198,18 @@ export const WithError: Story = {
     min: 0,
     max: 100,
     step: 10,
-    isVertical: false,
     error: "This is an error message",
   },
 };
+
+
+export const WithValue: Story = {
+  args: {
+    size: "sm",
+    min: 0,
+    max: 100,
+    step: 10,
+    showValue: true,
+  },
+};
+
