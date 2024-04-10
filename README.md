@@ -12,6 +12,9 @@
 
 - To run development server, you can do `yarn dev`. Which will start the user package.
 
+### Run storybook
+- `yarn storybook`
+
 Reference Links:
 
 - [Compound Components](https://kentcdodds.com/blog/compound-components-with-react-hooks)
