@@ -39,6 +39,10 @@ const closeButtonStyles = tv({
       medium: "h-4 w-4",
       large: "h-5 w-5",
     },
+    location: {
+      start: "mr-2",
+      end: "ml-2",
+    },
   },
   defaultVariants: {
     size: "medium",
@@ -87,7 +91,10 @@ export const Tag: React.FC<TagProps> = ({
       {showCloseButton && (
         <button
           onClick={onCloseButton}
-          className='ml-2 flex items-center justify-center'
+          className={cn(
+            "flex items-center justify-center",
+            closeButtonStyles({ location })
+          )}
         >
           <X className={closeButtonStyles({ size })} />
         </button>
