@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 const rootStyles = tv({
   variants: {
     size: {
-      small: "h-7 w-16",
-      medium: "h-8 w-18",
-      large: "h-9 w-20",
+      small: "h-7",
+      medium: "h-8",
+      large: "h-9",
     },
     color: {
       primary: "bg-primary-500",
@@ -27,7 +27,7 @@ const rootStyles = tv({
   defaultVariants: {
     size: "medium",
     color: "default",
-    shape: "rounded",
+    shape: "pill",
     location: "end",
   },
 });
@@ -78,7 +78,7 @@ export const Tag: React.FC<TagProps> = ({
   return (
     <div
       className={cn(
-        "flex items-center justify-center px-3 text-slate-50",
+        "flex max-w-fit items-center justify-center px-3 text-slate-50",
         rootStyles({ size, color, shape, location })
       )}
     >
