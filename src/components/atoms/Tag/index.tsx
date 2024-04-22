@@ -92,7 +92,7 @@ export const Tag: React.FC<TagProps> = ({
         <button
           onClick={onCloseButton}
           className={cn(
-            "flex items-center justify-center",
+            "flex items-center justify-end",
             closeButtonStyles({ location })
           )}
         >
