@@ -11,3 +11,5 @@ export * from "./TextArea";
 export * from "./Label";
 export * from "./Switch";
 export * from "./Loader";
+export * from "./Table";
+export * from "./Pagination";
