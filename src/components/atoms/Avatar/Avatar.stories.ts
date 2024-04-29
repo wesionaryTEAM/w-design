@@ -20,11 +20,11 @@ const meta: Meta<typeof Avatar> = {
       control: { type: "text" },
       defaultValue: "Dibesh Raj Subedi",
     },
-    isRounded: {
+    backgroundShape: {
       description: "Make the avatar rounded",
-      options: ["yes", "no"],
+      options: ["circle", "square"],
       control: { type: "radio" },
-      defaultValue: "yes",
+      defaultValue: "circle",
     },
     fallbackText: {
       description: "The fallback text of the image",
@@ -50,6 +50,7 @@ export const Default: Avatar = {
     src: "https://avatars.githubusercontent.com/u/65608497",
     alt: "Dibesh Raj Subedi",
     colorClass: "bg-slate-200 dark:bg-slate-800",
+    backgroundShape: "circle",
   },
 };
 
@@ -58,6 +59,7 @@ export const WithFallback: Avatar = {
     size: "md",
     fallbackText: "DS",
     colorClass: "bg-slate-900 dark:bg-slate-800 text-white",
+    backgroundShape: "circle",
   },
 };
 
@@ -65,7 +67,7 @@ export const NotRounded: Avatar = {
   args: {
     size: "md",
     fallbackText: "DS",
-    isRounded: "no",
+    backgroundShape: "square",
     colorClass: "bg-slate-900 dark:bg-slate-800 text-white",
   },
 };
@@ -74,7 +76,7 @@ export const CustomColor: Avatar = {
   args: {
     size: "md",
     fallbackText: "DS",
-    isRounded: "no",
+    backgroundShape: "square",
     colorClass: "bg-orange-900 dark:bg-orange-800 text-white",
   },
 };
