@@ -1,6 +1,7 @@
 import { VariantProps, tv } from "tailwind-variants";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import React from "react";
 
 const rootStyles = tv({
   variants: {
@@ -68,32 +69,40 @@ export type TagProps = TTag & {
   value: string;
   onCloseButton?: () => void;
   showCloseButton?: boolean;
+  className?: string;
+  textClassName?: string;
+  closeButtonClassName?: string;
 };
 
 export const Tag: React.FC<TagProps> = ({
-  value,
-  size,
-  color,
-  shape,
-  location = "end",
-  onCloseButton,
-  showCloseButton = true,
-}) => {
+                                          value,
+                                          size,
+                                          color,
+                                          shape,
+                                          location = "end",
+                                          onCloseButton,
+                                          showCloseButton = true,
+                                          className,
+                                          textClassName,
+                                          closeButtonClassName,
+                                        }) => {
   return (
     <div
       className={cn(
         "flex max-w-fit items-center justify-center px-3 text-slate-50",
-        rootStyles({ size, color, shape, location })
+        rootStyles({ size, color, shape, location }),
+        className,
       )}
     >
-      <span className={cn(textStyles({ size }))}>{value}</span>
+      <span className={cn(textStyles({ size }), textClassName)}>{value}</span>
 
       {showCloseButton && (
         <button
           onClick={onCloseButton}
           className={cn(
             "flex items-center justify-end",
-            closeButtonStyles({ location })
+            closeButtonStyles({ location }),
+            closeButtonClassName,
           )}
         >
           <X className={closeButtonStyles({ size })} />
