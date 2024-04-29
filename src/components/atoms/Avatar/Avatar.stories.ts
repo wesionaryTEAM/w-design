@@ -49,6 +49,7 @@ export const Default: Avatar = {
     fallbackText: "DS",
     src: "https://avatars.githubusercontent.com/u/65608497",
     alt: "Dibesh Raj Subedi",
+    colorClass: "bg-slate-200 dark:bg-slate-800",
   },
 };
 
