@@ -12,16 +12,16 @@ const variants = {
     xxl: "h-16 w-16 text-xl",
   },
   variant: {
-    isRounded: {
-      yes: "rounded-full",
-      no: "rounded-none",
+    backgroundShape: {
+      circle: "rounded-full",
+      square: "rounded-none",
     },
   },
   defaultVariants: {
     size: "md",
     variant: {
       color: "default",
-      isRounded: "yes",
+      backgroundShape: "circle",
     },
   },
 }
@@ -34,12 +34,12 @@ interface ColorProps {
   colorClass?: string
 }
 
-interface RoundedProps {
-  isRounded?: 'yes' | 'no'
+interface ShapeProps {
+  backgroundShape?: 'circle' | 'square'
 }
 
 interface BasePros extends
-  SizeProps, RoundedProps, ColorProps { }
+  SizeProps, ShapeProps, ColorProps { }
 
 interface WrapperProps extends
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>,
@@ -54,7 +54,7 @@ const AvatarWrapper = React.forwardRef<
     className={cn(
       "relative flex shrink-0 overflow-hidden",
       variants.size[props.size],
-      variants.variant.isRounded[props?.isRounded ?? "yes"],
+      variants.variant.backgroundShape[props?.backgroundShape ?? "circle"],
       className,
     )}
     {...props}
@@ -80,7 +80,7 @@ const Image = React.forwardRef<
 
 interface FallbackProps extends
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>,
-  RoundedProps, ColorProps { }
+  ShapeProps, ColorProps { }
 
 const Fallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,
@@ -90,7 +90,7 @@ const Fallback = React.forwardRef<
     ref={ref}
     className={cn(
       "flex h-full w-full items-center justify-center",
-      variants?.variant?.isRounded[props?.isRounded ?? "yes"],
+      variants?.variant?.backgroundShape[props?.backgroundShape ?? "circle"],
       props?.colorClass ?? "bg-slate-200 dark:bg-slate-800",
       className
     )}
