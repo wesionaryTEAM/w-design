@@ -61,13 +61,19 @@ const AvatarWrapper = React.forwardRef<
   />
 ))
 
+interface ImageProps extends
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>,
+  ColorProps{ }
+
 const Image = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Image>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+  ImageProps
 >(({ className, ...props }, ref) => (
   <AvatarPrimitive.Image
     ref={ref}
-    className={cn("aspect-square h-full w-full", className)}
+    className={cn("aspect-square h-full w-full bg-transparent",
+      props?.colorClass ?? "bg-slate-200 dark:bg-slate-800",
+      className)}
     {...props}
   />
 ))
@@ -85,7 +91,7 @@ const Fallback = React.forwardRef<
     className={cn(
       "flex h-full w-full items-center justify-center",
       variants?.variant?.isRounded[props?.isRounded ?? "yes"],
-      props?.colorClass ?? "bg-slate-100 dark:bg-slate-800",
+      props?.colorClass ?? "bg-slate-200 dark:bg-slate-800",
       className
     )}
     {...props}
