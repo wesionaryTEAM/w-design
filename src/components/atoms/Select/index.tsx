@@ -1,164 +1,356 @@
 "use client";
 
-import * as React from "react";
 import {
-  CaretSortIcon,
-  CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  CrossCircledIcon,
+  MagnifyingGlassIcon,
 } from "@radix-ui/react-icons";
-import * as SelectPrimitive from "@radix-ui/react-select";
+import { cva } from "class-variance-authority";
+import React from "react";
+import type {
+  ClearIndicatorProps,
+  DropdownIndicatorProps,
+  GroupBase,
+  InputActionMeta,
+  MultiValueProps,
+  NoticeProps,
+  OptionProps,
+  Props,
+  StylesConfig,
+} from "react-select";
+import Select, { components } from "react-select";
+import { Checkbox } from "../Checkbox";
 
-import { cn } from "@/lib/utils";
+export interface OptionType {
+  value: string | number;
+  label: string;
+}
 
-const Select = SelectPrimitive.Root;
+export type SingleOrMultipleOption<M extends boolean> = M extends false
+  ? OptionType
+  : OptionType[];
 
-const SelectGroup = SelectPrimitive.Group;
+const OptionComponent: React.ComponentType<
+  OptionProps<OptionType, boolean, GroupBase<OptionType>>
+> = props => {
+  return (
+    <div>
+      <components.Option {...props}>
+        <Checkbox checked={props.isSelected} id={props.label} />
+      </components.Option>
+    </div>
+  );
+};
 
-const SelectValue = SelectPrimitive.Value;
+const MultiValueComponent: React.ComponentType<
+  MultiValueProps<OptionType, boolean, GroupBase<OptionType>>
+> = props => {
+  const labelToBeDisplayed = `${props.data.label} `;
+  return (
+    <components.MultiValue {...props}>
+      {labelToBeDisplayed}
+    </components.MultiValue>
+  );
+};
 
-const SelectTrigger = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
-  <SelectPrimitive.Trigger
-    ref={ref}
-    className={cn(
-      "border-input ring-offset-background placeholder:text-muted-foreground focus:ring-ring flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border bg-transparent px-3 py-2 text-sm shadow-sm invalid:ring-1 invalid:ring-red-500 focus:outline-none focus:ring-1 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
-      className
-    )}
-    {...props}
-  >
-    {children}
-    <SelectPrimitive.Icon asChild>
-      <CaretSortIcon className='h-4 w-4 opacity-50' />
-    </SelectPrimitive.Icon>
-  </SelectPrimitive.Trigger>
-));
-SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
+const NoOptionsMessage: React.ComponentType<
+  NoticeProps<OptionType, boolean, GroupBase<OptionType>>
+> = props => {
+  return (
+    <components.NoOptionsMessage {...props}>
+      <span className='custom-css-class'>{"No Options"}</span>
+    </components.NoOptionsMessage>
+  );
+};
 
-const SelectScrollUpButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
->(({ className, ...props }, ref) => (
-  <SelectPrimitive.ScrollUpButton
-    ref={ref}
-    className={cn(
-      "flex cursor-default items-center justify-center py-1",
-      className
-    )}
-    {...props}
-  >
-    <ChevronUpIcon />
-  </SelectPrimitive.ScrollUpButton>
-));
-SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
-
-const SelectScrollDownButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
->(({ className, ...props }, ref) => (
-  <SelectPrimitive.ScrollDownButton
-    ref={ref}
-    className={cn(
-      "flex cursor-default items-center justify-center py-1",
-      className
-    )}
-    {...props}
-  >
-    <ChevronDownIcon />
-  </SelectPrimitive.ScrollDownButton>
-));
-SelectScrollDownButton.displayName =
-  SelectPrimitive.ScrollDownButton.displayName;
-
-const SelectContent = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({ className, children, position = "popper", ...props }, ref) => (
-  <SelectPrimitive.Portal>
-    <SelectPrimitive.Content
-      ref={ref}
-      className={cn(
-        "bg-popover text-popover-foreground relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-        position === "popper" &&
-          "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
-        className
-      )}
-      position={position}
-      {...props}
-    >
-      <SelectScrollUpButton />
-      <SelectPrimitive.Viewport
-        className={cn(
-          "p-1",
-          position === "popper" &&
-            "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
+const DropdownIndicator: React.ComponentType<
+  DropdownIndicatorProps<OptionType, boolean, GroupBase<OptionType>>
+> = props => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <>
+        {props.selectProps.isSearchable ? (
+          <MagnifyingGlassIcon className='text-black-300 h-4 w-4 p-0' />
+        ) : null}
+        {props.isFocused ? (
+          <ChevronUpIcon className='text-black-400 h-4 w-4 p-0' />
+        ) : (
+          <ChevronDownIcon className='text-black-400 h-4 w-4 p-0' />
         )}
-      >
-        {children}
-      </SelectPrimitive.Viewport>
-      <SelectScrollDownButton />
-    </SelectPrimitive.Content>
-  </SelectPrimitive.Portal>
-));
-SelectContent.displayName = SelectPrimitive.Content.displayName;
+      </>
+    </components.DropdownIndicator>
+  );
+};
 
-const SelectLabel = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Label>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
->(({ className, ...props }, ref) => (
-  <SelectPrimitive.Label
-    ref={ref}
-    className={cn("px-2 py-1.5 text-sm font-semibold", className)}
-    {...props}
-  />
-));
-SelectLabel.displayName = SelectPrimitive.Label.displayName;
+const ClearIndicator: React.ComponentType<
+  ClearIndicatorProps<OptionType, boolean, GroupBase<OptionType>>
+> = props => {
+  return (
+    <components.ClearIndicator {...props}>
+      <CrossCircledIcon className='text-black-400 -mr-3 h-4 p-0' />
+    </components.ClearIndicator>
+  );
+};
 
-const SelectItem = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(({ className, children, ...props }, ref) => (
-  <SelectPrimitive.Item
-    ref={ref}
-    className={cn(
-      "focus:bg-accent focus:text-accent-foreground relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      className
-    )}
-    {...props}
-  >
-    <span className='absolute right-2 flex h-3.5 w-3.5 items-center justify-center'>
-      <SelectPrimitive.ItemIndicator>
-        <CheckIcon className='h-4 w-4' />
-      </SelectPrimitive.ItemIndicator>
-    </span>
-    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-  </SelectPrimitive.Item>
-));
-SelectItem.displayName = SelectPrimitive.Item.displayName;
+interface SelectInputProps<M extends boolean> {
+  label?: string | React.ReactNode;
+  showLabel?: boolean;
+  defaultValue?: Props<OptionType>["defaultValue"];
+  options?: OptionType[];
+  onChange?: (value: SingleOrMultipleOption<M>) => void;
+  isLoading?: Props<OptionType>["isLoading"];
+  error?: string;
+  id?: string;
+  placeholder?: string | React.ReactNode;
+  name?: string;
+  value?: SingleOrMultipleOption<M>;
+  disabled?: boolean;
+  className?: string;
+  multiple?: boolean;
+  closeMenuOnSelect?: boolean;
+  hideSelectedOptions?: boolean;
+  isClearable?: boolean;
+  isSearchable?: boolean;
+  controlShouldRenderValue?: boolean;
+  size?: "sm" | "md";
+  //to be added later
+  // field?: ControllerRenderProps<any, any>;
+  required?: boolean;
+  handleSearchInputChange?: (_: string, __: InputActionMeta) => void;
+  onMenuScrollToBottom?: () => void;
+  selectBoxBorder?: string;
+  disabledOptions?: OptionType[];
+  errorClassName?: string;
+  disableErrorPlaceholder?: boolean;
+  menuListClassName?: string;
+  containerClassName?: string;
+  controlClassName?: string;
+  borderLess?: boolean;
+}
 
-const SelectSeparator = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Separator>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
->(({ className, ...props }, ref) => (
-  <SelectPrimitive.Separator
-    ref={ref}
-    className={cn("bg-muted -mx-1 my-1 h-px", className)}
-    {...props}
-  />
-));
-SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
+const outer = cva("w-full flex flex-col gap-2");
 
-export {
-  Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
-  SelectContent,
-  SelectLabel,
-  SelectItem,
-  SelectSeparator,
-  SelectScrollUpButton,
-  SelectScrollDownButton,
+const selectContainer = cva(
+  " focus-within:border-primary focus-within:outline focus-within:outline-[3px] focus-within:outline-primary-200/30 rounded-lg flex items-center bg-white",
+  {
+    variants: {
+      error: {
+        true: "!border-error-500 focus-within:!border-error-500 focus-within:!outline-error-200/30",
+      },
+      disabled: {
+        true: "!bg-error bg-gray-100",
+      },
+    },
+  }
+);
+
+const selectControl = cva(
+  "!p-0  !border-none !shadow-transparent !rounded-lg  !cursor-pointer "
+);
+
+const generateSelectClassNames = ({
+  error,
+  disabled,
+  menuListClassName,
+  containerClassName,
+  controlClassName,
+  isMulti,
+  borderLess,
+}: {
+  error?: string;
+  disabled: boolean;
+  menuListClassName?: string;
+  containerClassName?: string;
+  isMulti: boolean;
+  controlClassName?: string;
+  borderLess?: boolean;
+}) => {
+  const commonProps = {
+    valueContainer: () => "!p-0 !m-0 !text-sm",
+    loadingIndicator: () => "-ml-10",
+    indicatorSeparator: () => "hidden",
+    input: () => "!h-full !p-0 !m-0",
+    indicatorsContainer: () => "p-0 flex items-center shrink-0",
+    menu: () => "p-0 z-[9999]",
+    menuList: () => `my-2 z-[9999] ${menuListClassName}`,
+    option: () => `!py-2 !px-2 bg-none !cursor-pointer !text-xs`,
+  };
+
+  const classNames = {
+    default: {
+      ...commonProps,
+      container: () =>
+        `h-10 w-full p-0 ${
+          borderLess ? "border-none" : "border border-secondary-75"
+        } ${selectContainer({
+          error: Boolean(error),
+        })}
+        ${
+          disabled && !borderLess
+            ? "!bg-[#E6E6E6]"
+            : disabled && borderLess
+              ? "!bg-white !text-brack"
+              : " !bg-white"
+        } ${containerClassName}`,
+      control: () =>
+        ` !px-1 w-full grow !h-10 ${selectControl()} ${
+          disabled ? "!bg-transparent " : " !bg-transparent"
+        } ${controlClassName}`,
+      singleValue: () =>
+        disabled
+          ? "!text-black-400"
+          : disabled && borderLess
+            ? "!text-brack"
+            : "",
+      placeholder: () =>
+        "!text-secondary-200 max-[370px]:!text-xs !text-sm !sm:text-md",
+      clearIndicator: () => "flex w-full p-0",
+    },
+    multi: {
+      ...commonProps,
+      container: () =>
+        `min-h-10 w-full ${
+          borderLess ? "border-none" : "border border-secondary-75"
+        } ${selectContainer({
+          error: Boolean(error),
+        })} ${
+          disabled && !borderLess
+            ? "!bg-[#E6E6E6] "
+            : disabled && borderLess
+              ? "!bg-white"
+              : " !bg-white"
+        } ${containerClassName}`,
+      control: () =>
+        `w-full grow
+        ${selectControl()} !p-1 ${
+          disabled ? "!bg-transparent " : " !bg-transparent"
+        } ${controlClassName}`,
+      multiValue: () => `!text-xs rounded-md`,
+    },
+  };
+
+  return isMulti ? classNames.multi : classNames.default;
+};
+
+const customStyles: StylesConfig<OptionType, boolean, GroupBase<OptionType>> = {
+  control: base => ({
+    ...base,
+    height: "100%",
+    border: "none",
+    boxShadow: "none",
+    "&:hover": {
+      border: "none",
+    },
+  }),
+};
+
+export const SelectInput = <M extends boolean>({
+  label,
+  showLabel = true,
+  error,
+  name,
+  onChange,
+  disabled = false,
+  className,
+  placeholder,
+  multiple = false,
+  closeMenuOnSelect,
+  hideSelectedOptions = false,
+  isClearable = false,
+  isSearchable = false,
+  controlShouldRenderValue,
+  containerClassName,
+  id,
+  onMenuScrollToBottom,
+  required = false,
+  handleSearchInputChange,
+  disabledOptions,
+  disableErrorPlaceholder = false,
+  menuListClassName,
+  controlClassName,
+  errorClassName,
+  value,
+  borderLess = false,
+  ...props
+}: SelectInputProps<M>) => {
+  //tobe added later
+  // const { t } = useTranslation()
+  // let errorName = "";
+  // if (name?.length) {
+  //   errorName = name;
+  // } else if (typeof label === "string") {
+  //   errorName = label;
+  // }
+
+  return (
+    <div
+      className={`${outer({ className })} ${
+        disableErrorPlaceholder ? "mb-0" : "mb-2"
+      }`}
+    >
+      <Select<OptionType, boolean>
+        {...props}
+        id={id ?? name}
+        name={name}
+        styles={customStyles}
+        menuPlacement='auto'
+        menuPortalTarget={
+          typeof document !== "undefined"
+            ? document.getElementById("root")
+            : undefined
+        }
+        isMulti={multiple}
+        formatOptionLabel={data => data.label}
+        isDisabled={disabled}
+        hideSelectedOptions={hideSelectedOptions}
+        placeholder={(placeholder as string) || "Please Select"}
+        isClearable={isClearable}
+        isSearchable={isSearchable}
+        closeMenuOnSelect={closeMenuOnSelect}
+        isOptionDisabled={options =>
+          disabledOptions?.includes(options) ?? false
+        }
+        value={value}
+        classNames={generateSelectClassNames({
+          error,
+          disabled,
+          menuListClassName,
+          isMulti: multiple,
+          containerClassName,
+          controlClassName,
+          borderLess,
+        })}
+        // ref={ref as any}
+        blurInputOnSelect={!multiple}
+        onChange={newValue => {
+          if (!onChange) return;
+          onChange(newValue as SingleOrMultipleOption<M>);
+        }}
+        classNamePrefix={multiple ? "react-select-multi" : "react-select"}
+        onMenuScrollToBottom={onMenuScrollToBottom}
+        components={
+          multiple
+            ? {
+                Option: OptionComponent,
+                MultiValue: MultiValueComponent,
+                NoOptionsMessage,
+                DropdownIndicator,
+                ClearIndicator,
+              }
+            : { NoOptionsMessage, DropdownIndicator, ClearIndicator }
+        }
+        controlShouldRenderValue={controlShouldRenderValue}
+        onInputChange={handleSearchInputChange}
+      />
+      {/* tobe added later */}
+      {/* {!disableErrorPlaceholder && (
+        <ErrorMessage
+          error={error}
+          className={errorClassName}
+          name={errorName}
+        />
+      )} */}
+    </div>
+  );
 };
