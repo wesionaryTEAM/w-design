@@ -15,12 +15,10 @@ import type {
   InputActionMeta,
   MultiValueProps,
   NoticeProps,
-  OptionProps,
   Props,
   StylesConfig,
 } from "react-select";
 import Select, { components } from "react-select";
-import { Checkbox } from "../Checkbox";
 
 export interface OptionType {
   value: string | number;
@@ -30,18 +28,6 @@ export interface OptionType {
 export type SingleOrMultipleOption<M extends boolean> = M extends false
   ? OptionType
   : OptionType[];
-
-const OptionComponent: React.ComponentType<
-  OptionProps<OptionType, boolean, GroupBase<OptionType>>
-> = props => {
-  return (
-    <div>
-      <components.Option {...props}>
-        <Checkbox checked={props.isSelected} id={props.label} />
-      </components.Option>
-    </div>
-  );
-};
 
 const MultiValueComponent: React.ComponentType<
   MultiValueProps<OptionType, boolean, GroupBase<OptionType>>
@@ -146,7 +132,7 @@ const selectContainer = cva(
 );
 
 const selectControl = cva(
-  "!p-0  !border-none !shadow-transparent !rounded-lg  !cursor-pointer "
+  "!p-0  !border-none !shadow-transparent !rounded-lg  !cursor-pointer text-start "
 );
 
 const generateSelectClassNames = ({
@@ -204,7 +190,7 @@ const generateSelectClassNames = ({
             ? "!text-brack"
             : "",
       placeholder: () =>
-        "!text-secondary-200 max-[370px]:!text-xs !text-sm !sm:text-md",
+        " text-start !text-secondary-200 max-[370px]:!text-xs !text-sm !sm:text-md",
       clearIndicator: () => "flex w-full p-0",
     },
     multi: {
@@ -332,7 +318,7 @@ export const SelectInput = <M extends boolean>({
         components={
           multiple
             ? {
-                Option: OptionComponent,
+                // Option: OptionComponent,
                 MultiValue: MultiValueComponent,
                 NoOptionsMessage,
                 DropdownIndicator,

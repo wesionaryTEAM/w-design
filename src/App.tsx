@@ -8,6 +8,8 @@ function App() {
         Please run storybook to see all the components
       </h1>
       <SelectInput
+        // multiple
+        className='w-[500px]'
         options={[
           {
             label: "Option 1",
