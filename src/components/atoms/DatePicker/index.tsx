@@ -14,8 +14,6 @@ type BaseDatePickerProps = {
   triggerButtonClassName?: string;
   placeholder?: React.ReactNode;
   prefixIcon?: React.ReactNode;
-  field?: any;
-  onChange?: (date: Date | DateRange | Date[] | undefined) => void;
 } & DayPickerProps;
 
 type DatePickerSingleOrDefaultProps = BaseDatePickerProps & {
@@ -28,62 +26,147 @@ type DatePickerRangeProps = BaseDatePickerProps & {
   dayRangeTo?: Date;
 };
 
-export const DatePicker: React.FC<
+export const DatePicker = React.forwardRef<
+  HTMLButtonElement,
   DatePickerRangeProps | DatePickerSingleOrDefaultProps
-> = ({ triggerButtonClassName, placeholder, prefixIcon, mode, ...props }) => {
-  const [date, setDate] = React.useState<Date>();
-  const [multipleDates, setMultipleDates] = React.useState<Date[]>([]);
-  const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
-    from:
-      mode === "range"
-        ? (props as DatePickerRangeProps).dayRangeFrom
-        : undefined,
-    to:
-      mode === "range" ? (props as DatePickerRangeProps).dayRangeTo : undefined,
-  });
+>(
+  (
+    {
+      triggerButtonClassName,
+      placeholder,
+      prefixIcon,
+      mode = "single",
+      selected,
+      onSelect,
+      ...props
+    },
+    ref
+  ) => {
+    const [date, setDate] = React.useState<Date | undefined>(selected as Date);
+    const [multipleDates, setMultipleDates] = React.useState<Date[]>(
+      (selected as Date[]) ?? []
+    );
+    const [dateRange, setDateRange] = React.useState<DateRange | undefined>(
+      (selected as DateRange) ?? {
+        from: (props as DatePickerRangeProps).dayRangeFrom,
+        to: (props as DatePickerRangeProps).dayRangeTo,
+      }
+    );
+    const [placeholderText, setPlaceholderText] =
+      React.useState<React.ReactNode>(placeholder);
 
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <button
-          className={cn(
-            "flex w-[280px] items-center justify-start rounded-md border px-4 py-2 text-left font-normal transition-colors duration-200 ease-in-out hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50",
-            (!date || !dateRange || !multipleDates.length) &&
-              "text-muted-foreground",
-            triggerButtonClassName
+    React.useEffect(() => {
+      let datePickerText: React.ReactNode;
+      switch (mode) {
+        case "range":
+          if (dateRange && dateRange.from && dateRange.to) {
+            datePickerText = `${format(dateRange.from, "PPP")} - ${format(
+              dateRange.to,
+              "PPP"
+            )}`;
+            setPlaceholderText(datePickerText);
+            return;
+          }
+          datePickerText = "Pick a date range";
+          setPlaceholderText(placeholder ?? datePickerText);
+          break;
+        case "single":
+          if (date) {
+            datePickerText = format(date, "PPP");
+            setPlaceholderText(datePickerText);
+            return;
+          }
+          datePickerText = "Pick a date";
+          setPlaceholderText(placeholder ?? datePickerText);
+          break;
+        case "multiple":
+          if (multipleDates.length) {
+            datePickerText = `${format(multipleDates[0], "PPP")} - ${format(
+              multipleDates[multipleDates.length - 1],
+              "PPP"
+            )}`;
+            datePickerText = `${multipleDates.map(date => format(date, "P")).join(", ")}`;
+            setPlaceholderText(datePickerText);
+            return;
+          }
+          datePickerText = "Pick multiple dates";
+          setPlaceholderText(placeholder ?? datePickerText);
+          break;
+      }
+    }, [mode, date, dateRange, multipleDates]);
+
+    return (
+      <Popover>
+        <PopoverTrigger asChild>
+          <button
+            ref={ref}
+            className={cn(
+              "flex w-full max-w-[305px] items-center justify-start rounded-md border px-4 py-2 text-left font-normal transition-colors duration-200 ease-in-out hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus-visible:ring-black",
+              (!date || !dateRange || !multipleDates.length) &&
+                "text-muted-foreground",
+              triggerButtonClassName
+            )}
+            aria-label='date-picker'
+          >
+            {prefixIcon ? (
+              <span className='mr-2 shrink-0'>{prefixIcon}</span>
+            ) : (
+              <CalendarIcon className='mr-2 h-4 w-4 shrink-0' />
+            )}
+            <span className='break-before-all'>{placeholderText}</span>
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className='w-auto p-0'>
+          {mode === "range" && (
+            <Calendar
+              mode={mode}
+              selected={dateRange}
+              onSelect={(date, selectedDay, activeModifiers, e) => {
+                onSelect &&
+                  onSelect(
+                    date as (DateRange & Date & Date[]) | undefined,
+                    selectedDay,
+                    activeModifiers,
+                    e
+                  );
+                setDateRange(date);
+              }}
+            />
           )}
-        >
-          {prefixIcon ? (
-            <span className='mr-2'>{prefixIcon}</span>
-          ) : (
-            <CalendarIcon className='mr-2 h-4 w-4' />
+          {mode === "single" && (
+            <Calendar
+              mode={mode}
+              selected={(selected as Date) ?? date}
+              onSelect={(date, selectedDay, activeModifiers, e) => {
+                onSelect &&
+                  onSelect(
+                    date as (DateRange & Date & Date[]) | undefined,
+                    selectedDay,
+                    activeModifiers,
+                    e
+                  );
+                setDate(date);
+              }}
+            />
           )}
-          {date ? (
-            format(date, "PPP")
-          ) : (
-            <span>{placeholder ? placeholder : "Pick a date"}</span>
+          {mode === "multiple" && (
+            <Calendar
+              mode={mode}
+              selected={(selected as Date[]) ?? multipleDates}
+              onSelect={(dates, selectedDay, activeModifiers, e) => {
+                onSelect &&
+                  onSelect(
+                    dates as (DateRange & Date & Date[]) | undefined,
+                    selectedDay,
+                    activeModifiers,
+                    e
+                  );
+                setMultipleDates(dates as Date[]);
+              }}
+            />
           )}
-        </button>
-      </PopoverTrigger>
-      <PopoverContent className='w-auto p-0'>
-        {mode === "range" && (
-          <Calendar mode={mode} selected={dateRange} onSelect={setDateRange} />
-        )}
-        {mode === "single" && (
-          <Calendar mode={mode} selected={date} onSelect={setDate} />
-        )}
-        {mode === "multiple" && (
-          <Calendar
-            mode={mode}
-            selected={multipleDates}
-            onSelect={(dates: Date[] | undefined) =>
-              setMultipleDates(dates || [])
-            }
-            initialFocus
-          />
-        )}
-      </PopoverContent>
-    </Popover>
-  );
-};
-1;
+        </PopoverContent>
+      </Popover>
+    );
+  }
+);
