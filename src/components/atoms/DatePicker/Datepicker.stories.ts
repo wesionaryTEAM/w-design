@@ -7,13 +7,23 @@ const meta: Meta<typeof DatePicker> = {
   argTypes: {
     triggerButtonClassName: {
       description: "Classname for the datepicker trigger button",
+      table: {
+        type: { summary: "string" },
+      },
+      control: { type: "text" },
     },
     prefixIcon: {
       description: "Icon to be displayed before the datepicker trigger button",
+      table: {
+        type: { summary: "React.ReactNode" },
+      },
+      control: { type: "object" },
     },
     mode: {
+      table: {
+        type: { summary: "string" },
+      },
       description: "Mode of the datepicker",
-      defaultValue: "",
       control: {
         type: "select",
       },
@@ -22,8 +32,40 @@ const meta: Meta<typeof DatePicker> = {
     placeholder: {
       description: "Placeholder text for the datepicker",
       control: { type: "text" },
+      table: {
+        type: { summary: "React.ReactNode | string" },
+      },
+    },
+    disabledDays: {
+      table: {
+        type: { summary: "Date[]" },
+      },
+      description: "Array of dates that should be disabled",
+      control: { type: "object" },
+    },
+    selected: {
+      table: {
+        type: { summary: "Date | Date[]" },
+      },
+      description: "Selected date(s)",
+      control: { type: "object" },
+    },
+    onSelect: {
+      table: {
+        type: { summary: "function" },
+      },
+      description: "Callback function when a date is selected",
+      control: { type: "object" },
+    },
+    numberOfMonths: {
+      description: "Number of months to be displayed in the datepicker",
+      control: { type: "number" },
+      table: {
+        type: { summary: "number (1 - 12)" },
+      },
     },
   },
+
   tags: ["autodocs"],
 };
 
@@ -49,13 +91,42 @@ export const RangeDatePicker: Story = {
   },
 };
 
+export const MultpleMonthsView: Story = {
+  args: {
+    mode: "range",
+    numberOfMonths: 2,
+  },
+};
+
+export const DisabledDays: Story = {
+  args: {
+    mode: "single",
+    disabledDays: [new Date()],
+  },
+  parameters: {
+    docs: {
+      description: { story: "Today's date is disabled" },
+    },
+  },
+};
+
+export const DisabledNavigation: Story = {
+  args: {
+    mode: "single",
+    disableNavigation: true,
+  },
+  parameters: {
+    docs: {
+      description: { story: "Navigations are disabled and hidden" },
+    },
+  },
+};
+
 export const UsageInForm: Story = {
   parameters: {
     docs: {
-      source: {
-        of: "",
-        language: "tsx",
-        code: `
+      description: {
+        story: `\`\`\`tsx
         const FormSchema = z.object({
           single: z.date({
             required_error: "Please select a date.",
@@ -86,7 +157,6 @@ export const UsageInForm: Story = {
                       <FormLabel>Select Single Date</FormLabel>
                       <FormControl>
                         <DatePicker
-                          placeholder='ok'
                           mode='single'
                           onSelect={field.onChange}
                           selected={field.value}
@@ -137,7 +207,7 @@ export const UsageInForm: Story = {
             </Form>
           );
         }
-        `,
+        \`\`\``,
       },
     },
   },

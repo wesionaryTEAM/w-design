@@ -14,6 +14,7 @@ type BaseDatePickerProps = {
   triggerButtonClassName?: string;
   placeholder?: React.ReactNode;
   prefixIcon?: React.ReactNode;
+  disabledDays?: Date[];
 } & DayPickerProps;
 
 type DatePickerSingleOrDefaultProps = BaseDatePickerProps & {
@@ -28,7 +29,8 @@ type DatePickerRangeProps = BaseDatePickerProps & {
 
 export const DatePicker = React.forwardRef<
   HTMLButtonElement,
-  DatePickerRangeProps | DatePickerSingleOrDefaultProps
+  | Omit<DatePickerRangeProps, "disabled">
+  | Omit<DatePickerSingleOrDefaultProps, "disabled">
 >(
   (
     {
@@ -38,6 +40,7 @@ export const DatePicker = React.forwardRef<
       mode = "single",
       selected,
       onSelect,
+      disabledDays,
       ...props
     },
     ref
@@ -131,6 +134,8 @@ export const DatePicker = React.forwardRef<
                   );
                 setDateRange(date);
               }}
+              disabled={disabledDays}
+              {...props}
             />
           )}
           {mode === "single" && (
@@ -147,6 +152,8 @@ export const DatePicker = React.forwardRef<
                   );
                 setDate(date);
               }}
+              disabled={disabledDays}
+              {...props}
             />
           )}
           {mode === "multiple" && (
@@ -163,6 +170,8 @@ export const DatePicker = React.forwardRef<
                   );
                 setMultipleDates(dates as Date[]);
               }}
+              disabled={disabledDays}
+              {...props}
             />
           )}
         </PopoverContent>
