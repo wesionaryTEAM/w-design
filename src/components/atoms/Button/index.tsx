@@ -2,7 +2,7 @@ import { VariantProps, tv } from "tailwind-variants";
 import React from "react"; // Import React
 import { cn } from "@/lib/utils";
 
-const button = tv({
+export const button = tv({
   base: 'relative inline-flex items-center justify-center rounded-md text-[#F8FAFC] border-0 disabled:opacity-[40%]',
   variants: {
     variant: {
@@ -28,6 +28,7 @@ const button = tv({
 
 
 type ButtonVariants = VariantProps<typeof button>;
+
 
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonVariants {
