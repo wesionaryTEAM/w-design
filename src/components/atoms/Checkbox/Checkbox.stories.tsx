@@ -5,6 +5,12 @@ const meta: Meta<typeof Checkbox> = {
   title: "Design System/Atoms/Checkbox",
   component: Checkbox,
   tags: ["autodocs"],
+  argTypes: {
+    label: {
+      control: "text",
+      description: "The label to display. Can be a string or a React node.",
+    },
+  },
 };
 
 export default meta;
@@ -15,6 +21,7 @@ const Default: Story = {
   args: {
     name: "checkbox",
     size: "default",
+    label: "",
   },
 };
 
