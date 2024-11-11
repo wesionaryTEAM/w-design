@@ -92,7 +92,14 @@ export const Dropdown: React.FC<DropdownProps> = ({
         className='inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none'
         onClick={toggleDropdown}
       >
-        {icon && <span className='mr-2'>{icon}</span>}
+        {icon && (
+          <span
+            style={{ marginTop: "auto", marginBottom: "auto" }}
+            className='mr-2'
+          >
+            {icon}
+          </span>
+        )}
         {triggerLabel}
       </button>
 

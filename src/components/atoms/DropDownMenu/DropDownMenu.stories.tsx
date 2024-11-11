@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Dropdown } from ".";
-import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
+import {
+  Pencil1Icon,
+  TrashIcon,
+  MixIcon,
+  DotsVerticalIcon,
+} from "@radix-ui/react-icons";
 
 const meta: Meta<typeof Dropdown> = {
   title: "Design System/Atoms/Dropdown",
@@ -10,6 +15,10 @@ const meta: Meta<typeof Dropdown> = {
     size: {
       control: { type: "select" },
       options: ["sm", "md", "lg"],
+    },
+    icon: {
+      control: "select",
+      options: ["Icon1", "Icon2"],
     },
     variant: {
       control: { type: "select" },
@@ -21,6 +30,10 @@ const meta: Meta<typeof Dropdown> = {
 export default meta;
 
 type Story = StoryObj<typeof Dropdown>;
+const iconMap = {
+  Icon1: <MixIcon />,
+  Icon2: <DotsVerticalIcon />,
+};
 
 // Default dropdown with action items
 export const Default: Story = {
@@ -43,10 +56,17 @@ export const Default: Story = {
     variant: "primary",
     icon: null,
   },
+  argTypes: {
+    icon: {
+      control: "select",
+      options: ["Icon1", "Icon2", null],
+      mapping: iconMap,
+    },
+  },
 };
 
 // Dropdown without an icon
-export const WithoutIcon: Story = {
+export const WithoutMenuIcon: Story = {
   args: {
     items: [
       { label: "Edit", onClick: () => alert("Edit clicked") },
@@ -60,6 +80,13 @@ export const WithoutIcon: Story = {
     size: "md",
     variant: "primary",
     icon: null, // No icon in the trigger
+  },
+  argTypes: {
+    icon: {
+      control: "select",
+      options: ["Icon1", "Icon2", null],
+      mapping: iconMap,
+    },
   },
 };
 
@@ -77,6 +104,13 @@ export const Destructive: Story = {
     size: "md",
     variant: "destructive",
     icon: null, // No icon in the trigger
+  },
+  argTypes: {
+    icon: {
+      control: "select",
+      options: ["Icon1", "Icon2", null],
+      mapping: iconMap,
+    },
   },
 };
 
@@ -96,6 +130,13 @@ export const Medium: Story = {
     triggerLabel: "Medium Dropdown",
     size: "md",
   },
+  argTypes: {
+    icon: {
+      control: "select",
+      options: ["Icon1", "Icon2", null],
+      mapping: iconMap,
+    },
+  },
 };
 
 // Large size dropdown
@@ -104,6 +145,13 @@ export const Large: Story = {
     ...Default.args,
     triggerLabel: "Large Dropdown",
     size: "lg",
+  },
+  argTypes: {
+    icon: {
+      control: "select",
+      options: ["Icon1", "Icon2", null],
+      mapping: iconMap,
+    },
   },
 };
 
@@ -121,5 +169,12 @@ export const Secondary: Story = {
     triggerLabel: "Actions",
     size: "md",
     variant: "secondary",
+  },
+  argTypes: {
+    icon: {
+      control: "select",
+      options: ["Icon1", "Icon2", null],
+      mapping: iconMap,
+    },
   },
 };
