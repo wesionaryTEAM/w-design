@@ -16,7 +16,7 @@ const meta: Meta<typeof Dropdown> = {
       control: { type: "select" },
       options: ["sm", "md", "lg"],
     },
-    icon: {
+    buttonIcon: {
       control: "select",
       options: ["Icon1", "Icon2"],
     },
@@ -54,10 +54,10 @@ export const Default: Story = {
     triggerLabel: "Actions",
     size: "md",
     variant: "primary",
-    icon: null,
+    buttonIcon: null,
   },
   argTypes: {
-    icon: {
+    buttonIcon: {
       control: "select",
       options: ["Icon1", "Icon2", null],
       mapping: iconMap,
@@ -66,7 +66,7 @@ export const Default: Story = {
 };
 
 // Dropdown without an icon
-export const WithoutMenuIcon: Story = {
+export const Primary: Story = {
   args: {
     items: [
       { label: "Edit", onClick: () => alert("Edit clicked") },
@@ -79,10 +79,10 @@ export const WithoutMenuIcon: Story = {
     triggerLabel: "Actions",
     size: "md",
     variant: "primary",
-    icon: null, // No icon in the trigger
+    buttonIcon: null, // No icon in the trigger
   },
   argTypes: {
-    icon: {
+    buttonIcon: {
       control: "select",
       options: ["Icon1", "Icon2", null],
       mapping: iconMap,
@@ -103,10 +103,10 @@ export const Destructive: Story = {
     triggerLabel: "Delete Actions",
     size: "md",
     variant: "destructive",
-    icon: null, // No icon in the trigger
+    buttonIcon: null, // No icon in the trigger
   },
   argTypes: {
-    icon: {
+    buttonIcon: {
       control: "select",
       options: ["Icon1", "Icon2", null],
       mapping: iconMap,
@@ -131,7 +131,7 @@ export const Medium: Story = {
     size: "md",
   },
   argTypes: {
-    icon: {
+    buttonIcon: {
       control: "select",
       options: ["Icon1", "Icon2", null],
       mapping: iconMap,
@@ -147,7 +147,7 @@ export const Large: Story = {
     size: "lg",
   },
   argTypes: {
-    icon: {
+    buttonIcon: {
       control: "select",
       options: ["Icon1", "Icon2", null],
       mapping: iconMap,
@@ -171,7 +171,7 @@ export const Secondary: Story = {
     variant: "secondary",
   },
   argTypes: {
-    icon: {
+    buttonIcon: {
       control: "select",
       options: ["Icon1", "Icon2", null],
       mapping: iconMap,

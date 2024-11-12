@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { tv, VariantProps } from "tailwind-variants";
+import { CaretSortIcon } from "@radix-ui/react-icons";
 
 // Define basic table styles
 const tableStyles = tv({
@@ -17,7 +18,7 @@ const tableStyles = tv({
 });
 
 const tableHeaderStyles = tv({
-  base: "px-6 py-3 text-left text-sm font-bold text-gray-500 uppercase tracking-wider",
+  base: "relative px-6 py-3 text-left text-sm font-bold text-gray-500 uppercase tracking-wider",
 });
 
 const tableRowStyles = tv({
@@ -45,7 +46,9 @@ export interface DataTableProps extends DataTableVariants {
     label: string;
     accessor: string;
     renderCell?: (row: any) => React.ReactNode;
+    handleSort?: () => void;
   }>;
+  needSorting?: boolean;
   data: Array<Record<string, any>>;
   renderRow?: (
     row: Record<string, any>,
@@ -57,6 +60,7 @@ export const DataTable: React.FC<DataTableProps> = ({
   columns,
   data,
   variant = "primary",
+  needSorting = true,
   renderRow,
 }) => {
   return (
@@ -73,6 +77,14 @@ export const DataTable: React.FC<DataTableProps> = ({
                       className={cn(tableHeaderStyles())}
                     >
                       {column.label}
+                      {needSorting && (
+                        <div
+                          className='absolute right-[8px] top-[12px] cursor-pointer'
+                          onClick={column?.handleSort}
+                        >
+                          <CaretSortIcon />
+                        </div>
+                      )}
                     </th>
                   ))}
                 </tr>

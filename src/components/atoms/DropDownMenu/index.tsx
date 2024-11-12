@@ -44,7 +44,7 @@ export interface DropdownProps extends DropdownVariants {
   triggerLabel: string;
   size?: "sm" | "md" | "lg";
   variant?: "primary" | "secondary" | "destructive";
-  icon?: React.ReactNode;
+  buttonIcon?: React.ReactNode;
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
@@ -52,7 +52,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   triggerLabel,
   size = "md",
   variant = "primary",
-  icon,
+  buttonIcon,
 }) => {
   const [open, setOpen] = useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
@@ -92,12 +92,12 @@ export const Dropdown: React.FC<DropdownProps> = ({
         className='inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none'
         onClick={toggleDropdown}
       >
-        {icon && (
+        {buttonIcon && (
           <span
             style={{ marginTop: "auto", marginBottom: "auto" }}
             className='mr-2'
           >
-            {icon}
+            {buttonIcon}
           </span>
         )}
         {triggerLabel}

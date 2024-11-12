@@ -15,14 +15,28 @@ const meta: Meta<DataTableProps> = {
 
 export default meta;
 
+const handleSort = () => {};
+
 // Define stories using StoryObj pattern
 export const Default: StoryObj<DataTableProps> = {
   args: {
     columns: [
-      { label: "Name", accessor: "name" },
-      { label: "Age", accessor: "age" },
-      { label: "Role", accessor: "role" },
-      { label: "Address", accessor: "address" },
+      {
+        label: "Name",
+        accessor: "name",
+        handleSort,
+      },
+      { label: "Age", accessor: "age", handleSort },
+      {
+        label: "Role",
+        accessor: "role",
+        handleSort,
+      },
+      {
+        label: "Address",
+        accessor: "address",
+        handleSort,
+      },
     ],
     data: [
       { name: "John Doe", age: 28, role: "Developer", address: "UK" },
@@ -30,22 +44,36 @@ export const Default: StoryObj<DataTableProps> = {
       { name: "Michael Brown", age: 45, role: "Manager", address: "NY" },
     ],
     variant: "primary",
+    needSorting: true,
   },
 };
 
 export const CustomCellRendering: StoryObj<DataTableProps> = {
   args: {
     columns: [
-      { label: "Name", accessor: "name" },
+      {
+        label: "Name",
+        accessor: "name",
+        handleSort,
+      },
       {
         label: "Age",
         accessor: "age",
+        handleSort,
         renderCell: row => {
           return <div className='font-bold'>{row.age}</div>;
         },
       },
-      { label: "Role", accessor: "role" },
-      { label: "Address", accessor: "address" },
+      {
+        label: "Role",
+        accessor: "role",
+        handleSort,
+      },
+      {
+        label: "Address",
+        accessor: "address",
+        handleSort,
+      },
     ],
     data: [
       { name: "John Doe", age: 28, role: "Developer", address: "UK" },
@@ -53,6 +81,7 @@ export const CustomCellRendering: StoryObj<DataTableProps> = {
       { name: "Michael Brown", age: 45, role: "Manager", address: "NY" },
     ],
     variant: "primary",
+    needSorting: true,
   },
 };
 
@@ -65,5 +94,6 @@ export const NoData: StoryObj<DataTableProps> = {
     ],
     data: [], // Empty data
     variant: "primary",
+    needSorting: false,
   },
 };
