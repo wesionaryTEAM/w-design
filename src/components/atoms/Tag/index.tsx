@@ -1,0 +1,113 @@
+import { VariantProps, tv } from "tailwind-variants";
+import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import React from "react";
+
+const rootStyles = tv({
+  variants: {
+    size: {
+      small: "h-7",
+      medium: "h-8",
+      large: "h-9",
+    },
+    color: {
+      primary: "bg-primary-500",
+      secondary: "bg-secondary-500",
+      default: "bg-slate-500",
+    },
+    shape: {
+      square: "rounded-none",
+      rounded: "rounded-md",
+      pill: "rounded-full",
+    },
+    location: {
+      start: "flex-row-reverse",
+      end: "flex-row",
+    },
+  },
+  defaultVariants: {
+    size: "medium",
+    color: "default",
+    shape: "pill",
+    location: "end",
+  },
+});
+
+const closeButtonStyles = tv({
+  variants: {
+    size: {
+      small: "h-3 w-3",
+      medium: "h-4 w-4",
+      large: "h-5 w-5",
+    },
+    location: {
+      start: "mr-2",
+      end: "ml-2",
+    },
+  },
+  defaultVariants: {
+    size: "medium",
+  },
+});
+
+const textStyles = tv({
+  variants: {
+    size: {
+      small: "text-xs",
+      medium: "text-sm",
+      large: "text-base",
+    },
+  },
+  defaultVariants: {
+    size: "medium",
+  },
+});
+
+type TTag = VariantProps<typeof rootStyles>;
+
+export type TagProps = TTag & {
+  value: string;
+  onCloseButton?: () => void;
+  showCloseButton?: boolean;
+  className?: string;
+  textClassName?: string;
+  closeButtonClassName?: string;
+};
+
+export const Tag: React.FC<TagProps> = ({
+                                          value,
+                                          size,
+                                          color,
+                                          shape,
+                                          location = "end",
+                                          onCloseButton,
+                                          showCloseButton = true,
+                                          className,
+                                          textClassName,
+                                          closeButtonClassName,
+                                        }) => {
+  return (
+    <div
+      className={cn(
+        "flex max-w-fit items-center justify-center px-3 text-slate-50",
+        rootStyles({ size, color, shape, location }),
+        className,
+      )}
+    >
+      <span className={cn(textStyles({ size }), textClassName)}>{value}</span>
+
+      {showCloseButton && (
+        <button
+          onClick={onCloseButton}
+          className={cn(
+            "flex items-center justify-end",
+            closeButtonStyles({ location }),
+            closeButtonClassName,
+          )}
+        >
+          <X className={closeButtonStyles({ size })} />
+        </button>
+      )}
+    </div>
+  );
+};
