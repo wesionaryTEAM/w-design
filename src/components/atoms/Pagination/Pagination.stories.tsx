@@ -29,7 +29,7 @@ type Story = StoryObj<typeof Pagination>;
 export const Default: Story = {
   args: {
     total: 100,
-    currentPage: 1,
+    currentPage: 6,
     pageSize: 10,
     onPageChange: (page: number) => alert(`Page changed to: ${page}`),
     size: "md",
@@ -42,7 +42,7 @@ export const Default: Story = {
 export const WithIcons: Story = {
   args: {
     total: 100,
-    currentPage: 1,
+    currentPage: 6,
     pageSize: 10,
     onPageChange: (page: number) => alert(`Page changed to: ${page}`),
     size: "md",
@@ -55,7 +55,7 @@ export const WithIcons: Story = {
 export const SmallWithIcons: Story = {
   args: {
     total: 100,
-    currentPage: 1,
+    currentPage: 6,
     pageSize: 10,
     onPageChange: (page: number) => alert(`Page changed to: ${page}`),
     size: "sm",
@@ -68,7 +68,7 @@ export const SmallWithIcons: Story = {
 export const MediumWithText: Story = {
   args: {
     total: 100,
-    currentPage: 1,
+    currentPage: 6,
     pageSize: 10,
     onPageChange: (page: number) => alert(`Page changed to: ${page}`),
     size: "md",
@@ -81,7 +81,7 @@ export const MediumWithText: Story = {
 export const LargeWithIcons: Story = {
   args: {
     total: 100,
-    currentPage: 1,
+    currentPage: 6,
     pageSize: 10,
     onPageChange: (page: number) => alert(`Page changed to: ${page}`),
     size: "lg",

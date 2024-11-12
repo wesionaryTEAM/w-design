@@ -72,20 +72,63 @@ export const Pagination: React.FC<PaginationProps> = ({
 
   const renderPageNumbers = () => {
     const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(
+    const siblingCount = 1; // number of pages around current page
+    const startPages = [1, 2];
+    const endPages = [totalPages - 1, totalPages];
+
+    // Pages around the current page
+    const middlePages = Array.from(
+      { length: 2 * siblingCount + 1 },
+      (_, i) => currentPage - siblingCount + i
+    ).filter(page => page > 2 && page < totalPages - 1);
+
+    // Combine start, middle, and end pages
+    const pageSet = new Set([...startPages, ...middlePages, ...endPages]);
+
+    pageSet.forEach(page => {
+      if (page >= 1 && page <= totalPages) {
+        pages.push(
+          <span
+            key={page}
+            className={cn(
+              paginationButton({ variant, active: page === currentPage })
+            )}
+            onClick={() => handlePageChange(page)}
+          >
+            {page}
+          </span>
+        );
+      }
+    });
+
+    // Add ellipses between non-consecutive pages
+    const pagesArray = Array.from(pageSet).sort((a, b) => a - b);
+    const pageItems = [];
+    for (let i = 0; i < pagesArray.length; i++) {
+      const page = pagesArray[i];
+      pageItems.push(
         <span
-          key={i}
+          key={page}
           className={cn(
-            paginationButton({ variant, active: i === currentPage })
+            paginationButton({ variant, active: page === currentPage })
           )}
-          onClick={() => handlePageChange(i)}
+          onClick={() => handlePageChange(page)}
         >
-          {i}
+          {page}
         </span>
       );
+
+      // Add ellipses if the next page is not consecutive
+      if (i < pagesArray.length - 1 && pagesArray[i + 1] !== page + 1) {
+        pageItems.push(
+          <span key={`ellipsis-${i}`} className='px-2'>
+            ...
+          </span>
+        );
+      }
     }
-    return pages;
+
+    return pageItems;
   };
 
   return (
