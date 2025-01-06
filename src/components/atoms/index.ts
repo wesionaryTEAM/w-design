@@ -11,4 +11,5 @@ export * from "./TextArea";
 export * from "./Label";
 export * from "./Switch";
 export * from "./Loader";
+export * from "./Tag";
 export * from "./DatePicker";
