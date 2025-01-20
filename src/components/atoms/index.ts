@@ -12,3 +12,5 @@ export * from "./Label";
 export * from "./Switch";
 export * from "./Loader";
 export { Checkbox } from "./Checkbox";
+export * from "./Tag";
+export * from "./DatePicker";
