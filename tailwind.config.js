@@ -29,7 +29,7 @@ export default withTV({
         },
         secondary: {
           100: "#cffafe",
-          200: "#a5f3fc",
+          200: "#CBCDD8",
           300: "#67e8f9",
           400: "#22d3ee",
           500: "#06b6d4",
@@ -39,8 +39,8 @@ export default withTV({
           900: "#164e63",
           DEFAULT: "#06b6d4",
         },
-        destructive:"#EF4444",
-        accent:"#F1F5F9",
+        destructive: "#EF4444",
+        accent: "#F1F5F9",
       },
       keyframes: {
         "accordion-down": {
